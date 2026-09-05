@@ -1,0 +1,59 @@
+---
+layout: article
+title: "AI-powered IDE Beyond Coding: How I Write My Posts"
+subtitle: "An unconventional step-by-step guide for boosting productivity and quality in your AI-assisted writing"
+part: 1
+final: false
+---
+
+@0-intro
+
+An overview of using local AI IDEs (Cursor, Trae) for long-form writing, leveraging past context and reusable instructions. Explains why IDEs are compelling beyond coding, contrasts them with chatbots and specialized tools, and sets expectations for the workflow and benefits.
+
+### 1. My Path To Writing in IDE
+@1-path-to-ide
+
+Personal journey from skepticism to adopting Trae IDE for non-coding work. Motivation, prior experience, subscription trigger, and discovery that IDE-driven writing improved readability and changed the author’s writing approach versus chatbot-only workflows.
+
+### 2. Example AI-Powered Writing Workflow
+@2-workflow
+
+High-level human–AI division of labor: humans focus on creative thinking and validation; AI assists with technical, structured steps. Presents the step-by-step workflow used for long-form pieces.
+
+#### Step 1. Brain-dumping
+
+Create a folder and `braindump.mkd`. Dictate or write ideas (any language), lightly structure with Markdown, optionally add `<TBD>` tags to mark gaps.
+
+#### Step 2. Creating an Outline
+Generate `outline.mkd` from the braindump via the IDE agent; then manually refine the outline. Include `@` lines to define section file names and order.
+
+#### Step 3. Generating section files
+
+Use IDE prompts with `outline_rules` and `article_rules` to auto-create section files. Prefer multiple files over a single long draft for quality, focus, and easier targeted edits.
+
+#### Step 4. Expanding and Validating
+
+Expand AI-generated sections where needed, adding missing micro-ideas. Choose manual writing or guided AI expansion; preserve short versions before large edits when useful.
+
+#### Step 5. Committing Before AI Changes
+
+Commit work-in-progress to Git to snapshot the baseline. Use concise conventional commit messages and push when appropriate to track upcoming AI edits.
+
+#### Step 6. AI-Driven Refining / Polishing
+
+Enhance selected files according to `article_rules`. Review diffs side-by-side, accept or reject changes paragraph by paragraph, and restore originals when the AI over-edits.
+
+### Final steps
+@3-final-steps
+
+Combine section files into one Markdown via a simple script. Paste into Google Docs using “Paste from Markdown”, then manually insert images and finalize formatting for publication.
+
+### The Best AI IDE Features
+@4-best-features
+
+Key advantages: diff-based review of AI edits and reuse of instructions and prior pieces as style/context. Notes on when autocompletion helps (and when it doesn’t) for creative writing.
+
+### Conclusion
+@conclusion
+
+AI IDEs enable a practical, repeatable workflow for long-form writing: they streamline technical steps while preserving author creativity, resulting in clearer, faster, and more consistent posts.

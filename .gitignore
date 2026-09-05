@@ -1,0 +1,12 @@
+# Links created by scripts/setup-claude.* (Claude and Cursor read .agents through them)
+.claude/skills
+.claude/rules
+
+# Images and assembled articles (sections-to-markdown.py output)
+**/dist/
+
+# OS and tooling
+.DS_Store
+.vscode
+__pycache__/
+*.pyc
