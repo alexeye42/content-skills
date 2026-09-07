@@ -14,13 +14,20 @@ them.
 ## Resolving the audience (for `*4content` skills)
 Look in this order; the first hit wins:
 1. The `## Audience` section of the piece's `n_qna.md` (`Audience:` and `Personas:`
-   lines, written by `qna-manager` when the human answered the audience question).
+   lines, right under the file title).
 2. The channel by the folder-name suffix — its `Audience` in `profile/audience.md`,
    no personas.
 3. Neither (no suffix, no `## Audience`): the orchestrator asks the human for the
-   audience and up to two personas through `qna-manager` as an *audience item*, so
-   the answer lands in `n_qna.md` for every later skill. Child skills never ask —
-   they report "audience unresolved" and stop.
+   audience and up to two personas through `qna-manager` (an ordinary question),
+   then writes the answer itself as the `## Audience` section at the top of
+   `n_qna.md`, right under the file title:
+   ```
+   ## Audience
+   Audience: <who>
+   Personas: <up to two, or "none">
+   ```
+   Every later skill reads it from there. Child skills never ask — they report
+   "audience unresolved" and stop.
 
 ## Resolving the channel
 The channel is the letter suffix of the piece folder (`N.n<suffix>-code`) and of its

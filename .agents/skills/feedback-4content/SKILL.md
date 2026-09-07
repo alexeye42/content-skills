@@ -96,9 +96,8 @@ usefulness 8/7`, then an **overall suggestion** (one paragraph, above the level 
 single phrases, no quotes): mandatory for ≤6, optional for 7–8, none for 9–10.
 Nothing else — no quotes with alternatives, no repetition of the callouts.
 
-When the caller asks for it (`review4content` always does), hand the overall
-suggestions to `qna-manager` for its *General feedback* section, so the human can
-respond there or in chat.
+The overall suggestions are chat-only; recording them is the caller's business
+(`review4content` records an exchange only when the human reacts).
 
 ## Mode: apply
 

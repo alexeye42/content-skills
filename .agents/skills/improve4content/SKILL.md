@@ -20,8 +20,8 @@ Delegates to: `improve-article-4content` (one file), `git-commit-flow` (commits)
 1. **Parse arguments:** the article folder (`N.n-piece-code`) and optional
    instructions (what to focus on, what never to touch). Resolve the audience per
    `audience_rules.md` (*Resolving the audience*); if unresolved, ask through
-   `qna-manager` as an audience item before any edit, and pass the audience to
-   every `improve-article-4content` call. Section files are the
+   `qna-manager` and write the `## Audience` section as that rule says, before any
+   edit; pass the audience to every `improve-article-4content` call. Section files are the
    `n-*.md` files per `project_rules.md`, processed in file-name order; the outline
    and other `*.mkd` files are ignored.
 

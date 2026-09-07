@@ -14,7 +14,7 @@ note if the session context may be lost, listing per part its initial score line
 and the accumulated patterns).
 
 Delegates to: `feedback-4content` (a part), `feedback-abstracts-4content` (framing),
-`qna-manager` (questions and general feedback), `git-commit-flow` (commits).
+`qna-manager` (questions and recorded exchanges), `git-commit-flow` (commits).
 
 ## Steps
 
@@ -22,7 +22,8 @@ Delegates to: `feedback-4content` (a part), `feedback-abstracts-4content` (frami
    personas (at most two — they override what is stored), optional instructions
    (remark limit, "strict everywhere", what never to flag). Resolve the audience per
    `audience_rules.md` (*Resolving the audience*); if it is unresolved, the audience
-   question joins round 0 as a `qna-manager` audience item. Section files are the `n-*.md` files per `project_rules.md`;
+   question joins round 0 and its answer is written as the `## Audience` section of
+   `n_qna.md` as that rule says. Section files are the `n-*.md` files per `project_rules.md`;
    the outline and other `*.mkd` files are ignored.
 
 2. **Commit check.** `git status --short` for the folder; commit uncommitted changes
@@ -32,8 +33,8 @@ Delegates to: `feedback-4content` (a part), `feedback-abstracts-4content` (frami
    angle for judging every other section — then all sections. Propose the split
    into parts per `profile/editorial.md` (*Review parts*); the intro and the
    conclusion form the LAST part together. Ask through
-   `qna-manager` with `record: no`: is the split ok? — plus the audience item when
-   needed (that one is always recorded). (`qna-manager` asks its own "file or
+   `qna-manager` with `record: no`: is the split ok? — plus the audience question
+   when needed (that one is always recorded). (`qna-manager` asks its own "file or
    inline" question on this first call — do not ask it here.) Wait for the
    confirmation.
 
@@ -41,9 +42,11 @@ Delegates to: `feedback-4content` (a part), `feedback-abstracts-4content` (frami
    1. `feedback-4content`, review mode: the files of the part, the audience, the
       intro as context, the patterns collected so far, the remark limit and any
       "strict everywhere" / never-flag instructions from step 1. Scores and overall
-      suggestions go to chat; the overall suggestions are also handed to
-      `qna-manager` for the *General feedback* section (it creates the Q&A file on
-      first use, whatever channel the questions go through).
+      suggestions go to chat only. If the human reacts to an overall suggestion —
+      in chat, or by asking to have it "in the file" — record the exchange through
+      `qna-manager` as an ordinary round: the suggestion as Q, the reaction as A
+      (blank when the human will answer in the file). Nothing is recorded unless
+      the human reacts.
    2. Commit via `git-commit-flow`, author `ai`.
    3. Stop. The human edits the files by hand (or asks to apply the feedback —
       see *Commands*). Wait for the signal ("done", "I edited it").

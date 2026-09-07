@@ -15,7 +15,7 @@ Two stages, each with cases:
 
 The skills ship in https://github.com/alexeye42/content-skills — a ready writing
 workspace. Its `README.md` covers cloning, the one-time `.claude` setup script for
-Claude and Cursor, `git-commit-flow`, and adding the skills to an existing project.
+Claude Code, `git-commit-flow`, and adding the skills to an existing project.
 
 The only files meant for you to edit are the two profile files:
 

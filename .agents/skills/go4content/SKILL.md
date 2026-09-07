@@ -44,8 +44,9 @@ otherwise 1A. The detected mode is confirmed in round 0.
    - the detected mode — "1A, correct?";
    - 1B only: run `find-facts-4content` first? (skip the question if the prompt
      already says "find facts");
-   - no suffix only: the audience and up to two personas, as the **audience item**
-     (`audience_rules.md`, *Resolving the audience*).
+   - no suffix only: the audience and up to two personas; write the answer as the
+     `## Audience` section of `n_qna.md` (`audience_rules.md`, *Resolving the
+     audience*).
    Wait for the answers.
 
 4. Pipeline by mode; pass the piece folder and the audience to each step:

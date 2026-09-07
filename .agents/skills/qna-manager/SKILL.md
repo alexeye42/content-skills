@@ -1,6 +1,6 @@
 ---
 name: qna-manager
-description: Ask the human clarifying questions through the best available channel (agent question tool, chat, or a *_qna.md file) and keep every round recorded in the qna file. Invoked by orchestrator skills that need answers or want to record general feedback; also when the user says "ask questions", "clarify first".
+description: Ask the human clarifying questions through the best available channel (agent question tool, chat, or a *_qna.md file) and keep every round recorded in the qna file. Invoked by orchestrator skills that need answers or want an exchange recorded; also when the user says "ask questions", "clarify first".
 ---
 
 # qna-manager
@@ -20,9 +20,6 @@ records the round in the Q&A file so the decision history lives in one place.
 - Optional **`record: no`** — ask but do not write to the file (e.g. an
   orchestrator's own round 0 about its work plan; this skill's automatic channel
   question from *Channel selection* step 1 still fires on that first call).
-- Optional **general feedback** items — see *General feedback section*.
-- Optional **audience item** — a question about the target audience and personas
-  whose answer is also written to the `## Audience` section (see below).
 
 ## Channel selection
 
@@ -72,13 +69,6 @@ task, append; otherwise create a new file with a numeric suffix (`1_qna.md` take
 ### Q&A: <Task title>
 <1–2 sentences of task context>
 
-## Audience
-Audience: <only when an audience item was asked — see below>
-Personas: <up to two, or "none">
-
-## General feedback
-<only when the caller asked for it — see below>
-
 ## Round 1 Questions (<MM/DD/YYYY>)
 
 ### [Section X]
@@ -95,22 +85,17 @@ A2:
 
 Rounds are numbered consecutively across the file.
 
-### Audience section
+Callers may keep their own fixed sections right under the file title (e.g. the
+`## Audience` section of `audience_rules.md`); this skill never writes or edits
+them and appends rounds below them.
 
-When the caller marks a question as the *audience item*, its answer is recorded
-twice: as a normal `Qn`/`An` pair, and as the `Audience:` / `Personas:` lines of a
-`## Audience` section placed right under the file title. Every `*4content` skill
-reads the audience from there (`audience_rules.md`, *Resolving the audience*).
-Personas are at most two; write `none` when the human gave none.
+### Recording an exchange
 
-### General feedback section
-
-Callers that produce per-section overall feedback (e.g. `feedback-4content`) can
-ask this skill to record it, so the human can respond either in the file or in chat.
-The section sits right under the file title, before Round 1, and holds items
-`GQ1:` / `GA1:`. This skill prefixes the caller's raw feedback with the section
-name: `GQ1: [1-intro] <feedback>`; `GA1:` holds the human's response. Responses are optional: never chase blank `GAn` items. A response given
-in chat is copied into the matching `GAn`.
+A caller may also ask to record something that was NOT asked as a question — e.g.
+the human's reaction in chat to a suggestion the agent made. Such an exchange is an
+ordinary round: the agent's statement as `Qn`, the human's words as `An` (blank
+when the human said they will answer in the file). Nothing is recorded before the
+human reacts.
 
 ## Waiting and resuming
 
