@@ -14,6 +14,7 @@ Rules are located in `.agents/rules`:
 - `format_rules.md` — markdown formatting and placeholder conventions
 - `article_rules.md` — per-type rules for long-form articles
 - `outline_rules.md` — outline files and titles/subtitles for articles
+- `plan_rules.md` — content plan files (`n_plan.mkd`): statuses, sections, and what the agent may add while discussing, planning, and checking
 - `metadata_rules.md` — title/subtitle (or post text) requirements and the options notation in the intro file
 
 ## Git commits

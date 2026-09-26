@@ -16,3 +16,10 @@ These rules describe the entire project.
 - A folder may contain a `dist` subfolder (gitignored) that you DON'T change unless instructed. It contains:
   - image files. An image file name can be referenced in the markdown file as `![*](image-name.png)`;
   - translation file or other *.md files, you must ignore them when analyzing the piece folder.
+
+# Building an article
+"Build the article" (also "собери статью") means assembling the piece's section files into one file by running, from the project root:
+```
+python3 .agents/skills/go4content/scripts/sections-to-markdown.py <piece-folder>
+```
+It concatenates the `*.md` section files in name order (skipping `*_qna.md`, stripping `<delete>` blocks) into `<piece-folder>/dist/<folder-name>.md`. Do not assemble the article by hand.

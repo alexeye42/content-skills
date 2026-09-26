@@ -16,8 +16,28 @@ guidelines stays in `outline_rules.md`.)
   be absent; if both exist and disagree, the intro's version is the current one —
   note the mismatch in chat.
 - **Post-text channels** (the channel's `Metadata` field in `profile/audience.md`
-  says "post text") have no subtitle: the `<!-- comment -->` holds a short post text
-  that accompanies the article link.
+  says "post text") have no subtitle: the `<!-- comment -->` under the heading is
+  the post itself, written by the rules of *Announce post* below.
+
+## Announce post
+A LinkedIn post lives in the intro file as `<!-- LinkedIn post:` … `-->`. On a
+post-text channel it is the comment under the heading, part of the article's
+metadata, and needs no URL. On any other channel it is written only on request:
+it sits under the subtitle comment and ends with the article's URL on its own line. Audience: the LinkedIn section
+of `profile/audience.md`; limits: `profile/editorial.md`, *Metadata limits*.
+- Hook: the concrete scale of what was done plus the author's own reaction
+  ("I wouldn't have believed it…"), not a belief the article argues against.
+- A personal angle next: why this post now and what the author actually did, in
+  plain nouns (website, CMS, CRM), and one positive sentence on how quality was
+  ensured, no "not X but Y".
+- Effects on the people around the author (colleagues, the company) count as much
+  as the author's own numbers.
+- Name the tool (Claude, not "the AI agent"); tag people as `@handle`, not links.
+- Close with who the article is for, then the bare URL. A "click for the long
+  read" line and a teaser of the contents are optional and the first to cut.
+- Examples: the two most recent `<!-- LinkedIn post:` blocks in other pieces'
+  intro files by commit date (`git log -1 --format=%ci -- <file>`), preferring
+  the same kind: post-text channel (`in`) or external link (other suffixes).
 
 ## Requirements
 Length and case limits for all three items are in `profile/editorial.md`

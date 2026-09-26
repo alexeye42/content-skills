@@ -29,14 +29,20 @@ def main():
         os.makedirs(dist_folder)
     output_filepath = os.path.join(dist_folder, output_filename)
 
-    with open(output_filepath, 'w') as outfile:
-        for i, filename in enumerate(md_files):
-            with open(os.path.join(full_path, filename), 'r') as infile:
-                content = infile.read()
-                content = re.sub(r'<delete>.*?</delete>', '', content, flags=re.IGNORECASE | re.DOTALL)
-                outfile.write(content.strip())
-                if i < len(md_files) - 1 and not content.endswith('\n\n'):
-                      outfile.write('\n\n')
+    parts = []
+    for filename in md_files:
+        with open(os.path.join(full_path, filename), 'r', encoding='utf-8') as infile:
+            content = infile.read()
+        # <delete> blocks may carry attributes, e.g. <delete reason="...">
+        content = re.sub(r'<delete\b[^>]*>.*?</delete>', '', content, flags=re.IGNORECASE | re.DOTALL)
+        content = re.sub(r'\n{3,}', '\n\n', content).strip()
+        if content:
+            parts.append(content)
+
+    # Files are stripped, so the separator is always needed: a file ending with
+    # blank lines must not glue the next file's heading to its last line.
+    with open(output_filepath, 'w', encoding='utf-8') as outfile:
+        outfile.write('\n\n'.join(parts) + '\n')
 
     print(f"Successfully created '{output_filename}' in '{os.path.relpath(dist_folder, project_root)}'.")
 

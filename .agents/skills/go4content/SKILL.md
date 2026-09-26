@@ -1,7 +1,7 @@
 ---
 name: go4content
-description: Run the full article pipeline, from a braindump or a human draft to a finished article with title and subtitle. Invoke via "/go4content <path> [plan]" (also "go for content").
-argument-hint: <path> [plan]
+description: Run the full article pipeline, from a braindump or a human draft to a finished article with title and subtitle. Invoke via "/go4content <path> [discuss|plan]" (also "go for content").
+argument-hint: <path> [discuss|plan]
 ---
 
 # go4content (orchestrator)
@@ -18,11 +18,16 @@ example sessions).
 | Mode | Human effort | Source | Pipeline |
 |---|---|---|---|
 | **1A quick** | minimal | `n_dump.mkd` (braindump, usually incomplete) | gap questions → outline → sections (`AI wrote` / `Must add` callouts for what the dump lacks) |
-| **1B full** | medium | `n_dump.mkd` | [find facts] → plan → check-plan gate → draft → outline → sections |
+| **1B full** | medium | `n_dump.mkd` | [discuss ideas ⇄ find ideas] → plan (+ find facts on request) → plan review → check → draft → outline → sections |
 | **1C draft** | maximal | `n_draft.mkd` written by the human | outline → sections |
 
-Auto-detection: `n_draft.mkd` exists → 1C; the prompt says "plan" or "full" → 1B;
-otherwise 1A. The detected mode is confirmed in round 0.
+Auto-detection: `n_draft.mkd` exists → 1C; the prompt says "discuss" or "full" → 1B
+starting with the discussion of ideas; the prompt says only "plan" → 1B starting
+with the plan; otherwise 1A. The detected mode is confirmed in round 0.
+
+The mode names are for this file and the README only. **In chat, never name a mode
+("1A", "1B"…)** — the human may not have read the README; describe the steps in
+plain words instead.
 
 ## Steps
 
@@ -40,10 +45,11 @@ otherwise 1A. The detected mode is confirmed in round 0.
 
 3. **Round 0** through `qna-manager`, recorded as the first round of `n_qna.md`
    (the file is created now; `qna-manager` first asks its own "file or inline"
-   question). Questions:
-   - the detected mode — "1A, correct?";
-   - 1B only: run `find-facts-4content` first? (skip the question if the prompt
-     already says "find facts");
+   question). Questions, in the language of the user's prompt:
+   - the detected mode, described in plain words, e.g. for 1B with the discussion:
+     "First we discuss the ideas of your dump, then I build a plan and write the
+     draft. Correct?"; for 1A: "I'll ask about the gaps in your dump and go straight
+     to the section files. Correct?";
    - no suffix only: the audience and up to two personas; write the answer as the
      `## Audience` section of `n_qna.md` (`audience_rules.md`, *Resolving the
      audience*).
@@ -52,10 +58,19 @@ otherwise 1A. The detected mode is confirmed in round 0.
 4. Pipeline by mode; pass the piece folder and the audience to each step:
    - **1A:** `create-outline-4content` (its gap questions go to `n_qna.md` as the
      next round) → `create-sections-4content`.
-   - **1B:** `find-facts-4content` (if chosen) → `create-plan-4content` (gap
-     questions before the plan) → `check-plan-4content` (block until the plan is
-     explicitly approved) → `create-draft-4content` → `create-outline-4content` →
-     `create-sections-4content`.
+   - **1B:**
+     1. With the discussion only: `discuss-ideas-4content`, round after round, until
+        the human says enough (it offers `find-ideas-4content` itself).
+     2. `create-plan-4content` — it offers `find-facts-4content`, asks the gap
+        questions, and ends with the human's review of the plan.
+     3. `check-plan-4content` — findings in the plan, then the rewrite on "apply".
+        "apply" means rewrite the plan AND go on to the draft; on "apply and stop",
+        stop after the rewrite and wait.
+     4. `create-draft-4content`. Then announce the next steps in plain words, in the
+        language of the user's prompt: "The draft is ready: `n_draft.mkd`. Next I'll
+        split the article into sections, one file per section, and then we'll polish
+        it: either I edit and you check, or I mark up my remarks and you edit."
+     5. `create-outline-4content` → `create-sections-4content`.
    - **1C:** `create-outline-4content` → `create-sections-4content`.
 
 5. **Final revision.** Ask the user (in chat, or with the agent's question tool if one
@@ -72,3 +87,5 @@ otherwise 1A. The detected mode is confirmed in round 0.
 - Each step is one of the `*4content` skills above; the other channels of a piece
   are offered by `create-outline-4content` when it outlines a draft (see
   `README.md`, *Second channel*).
+- The skills of 1B know nothing about modes: they act on the plan's status and
+  sections (`plan_rules.md`).

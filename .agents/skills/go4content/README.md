@@ -44,21 +44,31 @@ The only files meant for you to edit are the two profile files:
 | Case | Your effort | You provide | What the agent does | Skills, in order |
 |---|---|---|---|---|
 | **1A quick** | minimal | `n_dump.mkd` | asks about the gaps, builds the outline, writes the sections; what the dump lacks is written briefly under a `🤖 AI wrote` callout, what only you can supply becomes a `➕ Must add` callout | `create-outline-4content` → `create-sections-4content` |
-| **1B full** | medium | `n_dump.mkd` | optional fact research, an editorial plan you approve, a full draft, then outline and sections | [`find-facts-4content`] → `create-plan-4content` → `check-plan-4content` → `create-draft-4content` → `create-outline-4content` → `create-sections-4content` |
+| **1B full** | medium | `n_dump.mkd` | optionally, first discusses the ideas with you (rounds of questions, its own ideas, web search for more on request); then an editorial plan you read and edit, the agent's check of it that you react to, a full draft, then outline and sections | [`discuss-ideas-4content` ⇄ `find-ideas-4content`] → `create-plan-4content` (+ `find-facts-4content` on request) → `check-plan-4content` → `create-draft-4content` → `create-outline-4content` → `create-sections-4content` |
 | **1C draft** | maximal | `n_draft.mkd` | outline and sections from your draft (translated to the channel's language if needed, light grammar fixes); if the draft is final, the agent offers to split it into sections **as is** by script instead | `create-outline-4content` → `create-sections-4content` |
 
 Start: `/go4content <folder>`. The agent detects the case (`n_draft.mkd`
-present → 1C; the word `plan` or `full` in your prompt → 1B; otherwise 1A) and
-confirms it in **round 0** together with the audience question (custom audience
-only) and, for 1B, whether to research facts first.
+present → 1C; the word `discuss` or `full` in your prompt → 1B starting with a
+discussion of the ideas; the word `plan` alone → 1B starting with the plan;
+otherwise 1A) and confirms it in **round 0**, in plain words, together with the
+audience question (custom audience only).
+
+In 1B the plan (`n_plan.mkd`) grows in stages: the discussion writes the thesis and
+the ideas; the plan step adds the structure and marks each idea accepted,
+transformed, parked, or rejected; then you read and edit the plan and say `ok`; the
+check marks up its remarks right in the plan, in the same notation as stage 2
+(`Should NOT …` to decline one); `apply` rewrites the plan and goes straight on to
+the draft (`apply and stop` to pause after the rewrite).
 
 Prompt words for the individual steps (when you want to run one by hand):
 
 | Step | Say | Output |
 |---|---|---|
-| Research | `find facts` | `n_findings.mkd` |
-| Plan | `make a plan` | `n_plan.mkd` |
-| Plan review gate | `check the plan`, then `ok` / `approved` | — |
+| Discuss the ideas | `discuss ideas`, then `enough` when done | `n_plan.mkd` (thesis and ideas) |
+| Search for ideas: evidence, objections, examples | `find ideas` | `n_findings.mkd` + ideas in `n_plan.mkd` |
+| Search for links, examples, facts | `find facts` | `n_findings.mkd` |
+| Plan | `make a plan`, then `ok` after your review | `n_plan.mkd` (structure) |
+| Plan check | `check the plan`, then `apply` / `apply and stop` | `n_plan.mkd` (checks) |
 | Draft | `write the draft` | `n_draft.mkd` |
 | Outline | `build the outline` | `n_outline.mkd` |
 | Sections | `create section files` (add `as is` to split a final draft verbatim by script) | `n-*.md` |
@@ -175,8 +185,8 @@ by default); `title 2` / `subtitle 1` / `post 1` picks a title option.
 
 ```
 /go4content 207.2m-agent-skills
-   (round 0: "1A quick, correct? Custom audience?" — the folder has the m suffix,
-    so only the mode is asked)
+   (round 0: "I'll ask about the gaps in your dump and go straight to the section
+    files. Correct?" — the folder has the m suffix, so the audience is not asked)
 ok
    (the agent asks 4–8 gap questions — main thesis, missing facts, what you will
     write yourself; in the file if you chose "file")
@@ -196,11 +206,39 @@ subtitle 2
 Between `next`s you replace the `Must add` parts and clear the `AI wrote` callouts
 you have checked; the agent never fills those for you.
 
+### Discussing the ideas first (1B)
+
+```
+/go4content 206.1m-topic discuss
+   ("First we discuss the ideas of your dump, then I build a plan and write the
+    draft. Correct?")
+ok
+   (a preliminary plan with the thesis and ideas; round 1 questions in n_qna.md)
+replied
+   ("Shall I ask more questions, or is that enough? I can also search the web for
+    ideas, examples, and objections to your thesis.")
+search
+   (4 ideas from the web added to the plan; round 2 questions)
+replied
+enough
+   ("Do you want me to find links on the web that support your ideas, examples
+    that illustrate them, or other facts?")
+no
+   (the plan: thesis, blocks, ideas marked; "read it, edit anything, then say ok")
+   ... you edit the plan ...
+ok
+   (the check: 5 remarks right in the plan)
+apply, except the remark on block 4
+   (the plan is rewritten, a Checks section records the check; the draft is
+    written; "Next I'll split the article into sections…")
+```
+
 ### Maximum human effort (1C + 2B without apply)
 
 ```
 /go4content 208.1ss-hiring-agents
-   (n_draft.mkd is in the folder → "1C draft, correct?")
+   (n_draft.mkd is in the folder → "I'll build the sections from your draft.
+    Correct?")
 ok
    (outline → sections from your draft → "AI edits or your edits?")
 B
@@ -237,6 +275,10 @@ done
 - `feedback-4content`, `feedback-abstracts-4content` — the per-part and
   intro/conclusion/title feedback behind `review4content`; say `give feedback on
   <files>` or `title options` for a one-off run.
+- `discuss-ideas-4content`, `find-ideas-4content`, `find-facts-4content` — the
+  discussion and the two web searches of case 1B; each runs on its own too (`discuss
+  ideas`, `find ideas`, `find facts`). The plan format they share is in
+  `rules/plan_rules.md`.
 - `qna-manager` — every question the pipeline asks goes through it; say `ask
   questions` to trigger a round yourself.
 - `git-commit-flow` — commits happen automatically: `ai` right after the agent's

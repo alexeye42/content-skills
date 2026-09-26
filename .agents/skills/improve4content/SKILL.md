@@ -43,10 +43,12 @@ Delegates to: `improve-article-4content` (one file), `git-commit-flow` (commits)
       they left alone. Post 3–5 lines of PATTERNS to chat (not phrases) and carry
       them into the next file's instructions. Write nothing to files.
 
-4. **Title and subtitle.** After the last file, judge the current title/subtitle (or
+4. **Title, subtitle, post.** After the last file, judge the current title/subtitle (or
    post text) and write the options block at the top of the intro file per
    `metadata_rules.md`. Wait for the human's choice ("title 2" / "subtitle 1" /
-   "post 1" or a hand edit); apply it and delete the callout block.
+   "post 1" or a hand edit); apply it and delete the callout block. The
+   announce post as in `feedback-abstracts-4content` step 3 (post-text channels
+   always, others on request).
 
 5. **Finish.** Commit check as in 3.1 (author `human/ai`). Report in chat: files
    edited, the patterns learned, and the final title/subtitle. Then, check if 

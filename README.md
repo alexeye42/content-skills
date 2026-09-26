@@ -28,7 +28,8 @@ or any agent that reads skills from a folder.
   the effort you want to spend: 
   - **1A quick** (braindump → gap questions → outline → sections; with `AI wrote` / 
     `Must add` callouts where the dump had nothing),
-  - **1B full** (fact research → editorial plan you approve → draft → outline → sections),
+  - **1B full** (optionally a discussion of your ideas first → an editorial plan you
+    read and edit → the agent's check of it → draft → outline → sections),
   - **1C draft** (your own draft → outline → sections)
   It ends by handing the article to #2 or #3 flow below.
 2. **`improve4content` — the AI edits, you review.** AI-edited files left as an 
@@ -119,8 +120,8 @@ Create a folder, put `n_dump.mkd` or `n_draft.mkd` in it, and say `/go4content <
 ## Repository layout
 
 ```
-.agents/skills/            12 *4content skills + qna-manager (scripts/ and references/ inside)
-.agents/rules/             8 rule files + profile/ (audience.md, editorial.md)
+.agents/skills/            14 *4content skills + qna-manager (scripts/ and references/ inside)
+.agents/rules/             9 rule files + profile/ (audience.md, editorial.md)
 000-examples/              a finished article as a sample: outline and section files
 scripts/                   setup-claude.sh / .cmd / .ps1
 AGENTS.md, CLAUDE.md       agent instructions — identical apart from the first lines
