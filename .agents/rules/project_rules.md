@@ -18,7 +18,7 @@ These rules describe the entire project.
   - translation file or other *.md files, you must ignore them when analyzing the piece folder.
 
 # Building an article
-"Build the article" (also "собери статью") means assembling the piece's section files into one file by running, from the project root:
+"Build the article" means assembling the piece's section files into one file by running, from the project root:
 ```
 python3 .agents/skills/go4content/scripts/sections-to-markdown.py <piece-folder>
 ```
