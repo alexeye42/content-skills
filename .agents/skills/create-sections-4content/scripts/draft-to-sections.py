@@ -10,12 +10,16 @@ above the first section heading (the title, the subtitle comment, the intro)
 becomes the first chunk.
 
 Section file names are `<n>-<code>.md`, where `<n>` is the prefix of the draft
-file name (`1m_draft.mkd` -> `1m`) and `<code>` comes, in order, from the
-`@code` lines of the outline (`<n>_outline.mkd` next to the draft, or the path
-given as the second argument). When there is no outline, or its `@` count does
-not match the number of chunks, codes are derived from the headings:
-`0-intro` for the first chunk, `<index>-<slug>` for numbered headings,
-`conclusion` for a heading containing "conclusion", and a plain slug otherwise.
+file name (`1m_draft.mkd` -> `1m`). Codes are derived from the headings and
+numbered by position, so the files sort in the draft's order: `0-intro` for the
+first chunk (text above the first heading), then `<position>-<slug>` (a leading
+number in the heading is dropped; the slug is up to three words, Cyrillic
+transliterated), and `<position>-conclusion` for the LAST chunk when its heading
+reads as a conclusion ("Conclusion", "What's next?", "Заключение", "Что дальше"…).
+A draft with no text above its first heading has no intro: the first chunk is
+named by its heading, with a warning. An older piece may have an outline (`<n>_outline.mkd`
+next to the draft, or the path given as the second argument); if its `@code`
+lines match the chunks in number, they are used instead.
 
 Existing section files are never overwritten unless `--force` is given.
 """
@@ -83,21 +87,29 @@ def outline_codes(path):
     return codes
 
 
+CYRILLIC = dict(zip(
+    "абвгдеёжзийклмнопрстуфхцчшщъыьэюя",
+    ["a", "b", "v", "g", "d", "e", "e", "zh", "z", "i", "y", "k", "l", "m", "n",
+     "o", "p", "r", "s", "t", "u", "f", "kh", "ts", "ch", "sh", "shch", "", "y",
+     "", "e", "yu", "ya"]))
+CONCLUSION_RE = re.compile(r"conclusion|what'?s next|заключение|итоги|выводы|что дальше")
+
+
 def slugify(text, max_words=3):
-    words = re.findall(r"[A-Za-z0-9]+", text.lower())
+    text = "".join(CYRILLIC.get(ch, ch) for ch in text.lower())
+    words = re.findall(r"[a-z0-9]+", text)
     return "-".join(words[:max_words]) or "section"
 
 
-def heading_code(chunk, position):
-    if position == 0:
-        return "0-intro"
-    title = HEADING_RE.match(chunk[0]).group(2).strip()
-    if "conclusion" in title.lower():
-        return "conclusion"
-    m = re.match(r"^(\d+)[.)]?\s+(.*)$", title)
-    if m:
-        return f"{m.group(1)}-{slugify(m.group(2))}"
-    return slugify(title)
+def heading_code(chunk, position, is_last):
+    m = HEADING_RE.match(chunk[0])
+    if not m:
+        return f"{position}-intro"
+    title = m.group(2).strip()
+    if is_last and CONCLUSION_RE.search(title.lower()):
+        return f"{position}-conclusion"
+    title = re.sub(r"^\d+(\.\d+)*[.)]?\s+", "", title)
+    return f"{position}-{slugify(title)}"
 
 
 def main():
@@ -133,7 +145,10 @@ def main():
               f"{len(chunks)} chunks; falling back to heading-derived codes.")
         codes = []
     if not codes:
-        codes = [heading_code(chunk, i) for i, chunk in enumerate(chunks)]
+        codes = [heading_code(chunk, i, i == len(chunks) - 1)
+                 for i, chunk in enumerate(chunks)]
+        if HEADING_RE.match(chunks[0][0]):
+            print("Warning: the draft has no title or intro above its first heading.")
 
     targets = [os.path.join(folder, f"{prefix}-{code}.md") for code in codes]
     existing = [t for t in targets if os.path.exists(t)]

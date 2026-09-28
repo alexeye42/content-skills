@@ -17,9 +17,9 @@ example sessions).
 
 | Mode | Human effort | Source | Pipeline |
 |---|---|---|---|
-| **1A quick** | minimal | `n_dump.mkd` (braindump, usually incomplete) | gap questions → outline → sections (`AI wrote` / `Must add` callouts for what the dump lacks) |
-| **1B full** | medium | `n_dump.mkd` | [discuss ideas ⇄ find ideas] → plan (+ find facts on request) → plan review → check → draft → outline → sections |
-| **1C draft** | maximal | `n_draft.mkd` written by the human | outline → sections |
+| **1A quick** | minimal | `n_dump.mkd` (braindump, usually incomplete) | gap questions → outline → outline gate → sections (`AI wrote` / `Must add` callouts for what the dump lacks) |
+| **1B full** | medium | `n_dump.mkd` | [discuss ideas ⇄ find ideas] → plan (+ find facts on request) → plan review → check → draft → split into sections |
+| **1C draft** | maximal | `n_draft.mkd` written by the human | final draft: split into sections as is (+ translation); rough draft: outline → outline gate → sections |
 
 Auto-detection: `n_draft.mkd` exists → 1C; the prompt says "discuss" or "full" → 1B
 starting with the discussion of ideas; the prompt says only "plan" → 1B starting
@@ -48,16 +48,22 @@ plain words instead.
    question). Questions, in the language of the user's prompt:
    - the detected mode, described in plain words, e.g. for 1B with the discussion:
      "First we discuss the ideas of your dump, then I build a plan and write the
-     draft. Correct?"; for 1A: "I'll ask about the gaps in your dump and go straight
-     to the section files. Correct?";
+     draft. Correct?"; for 1A: "I'll ask about the gaps in your dump, show you an
+     outline to approve, then write the section files. Correct?";
    - no suffix only: the audience and up to two personas; write the answer as the
      `## Audience` section of `n_qna.md` (`audience_rules.md`, *Resolving the
-     audience*).
+     audience*);
+   - 1C only: the other channels (*Other channels* below);
+   - 1C only: final or rough — run the check of `create-sections-4content` (step
+     2.1). A final draft: "Your draft looks finished — shall I split it into
+     sections as is (recommended), or improve it through an outline first?"; a rough
+     one: "Your draft reads as notes to expand — I'll build an outline for you to
+     approve, then write the sections from it. Correct?"
    Wait for the answers.
 
 4. Pipeline by mode; pass the piece folder and the audience to each step:
    - **1A:** `create-outline-4content` (its gap questions go to `n_qna.md` as the
-     next round) → `create-sections-4content`.
+     next round; it ends at the outline gate) → `create-sections-4content`.
    - **1B:**
      1. With the discussion only: `discuss-ideas-4content`, round after round, until
         the human says enough (it offers `find-ideas-4content` itself).
@@ -70,8 +76,12 @@ plain words instead.
         language of the user's prompt: "The draft is ready: `n_draft.mkd`. Next I'll
         split the article into sections, one file per section, and then we'll polish
         it: either I edit and you check, or I mark up my remarks and you edit."
-     5. `create-outline-4content` → `create-sections-4content`.
-   - **1C:** `create-outline-4content` → `create-sections-4content`.
+     5. Ask about the other channels (*Other channels* below), then
+        `create-sections-4content` — it splits the draft as is.
+   - **1C:** split as is → `create-sections-4content` (it inserts missing headings
+     into the draft for the human's ok, splits, and translates if needed); improve
+     or rough → `create-outline-4content` (ends at the outline gate) →
+     `create-sections-4content`.
 
 5. **Final revision.** Ask the user (in chat, or with the agent's question tool if one
    exists) which way to go:
@@ -84,8 +94,15 @@ plain words instead.
 ## Notes
 - Run each step in the main context, sequentially; do not start a step before the
   previous one is complete.
-- Each step is one of the `*4content` skills above; the other channels of a piece
-  are offered by `create-outline-4content` when it outlines a draft (see
-  `README.md`, *Second channel*).
+- Each step is one of the `*4content` skills above.
+- **Other channels.** Once a draft exists (1C: round 0; 1B: after the draft), ask
+  through `qna-manager` (one question, recorded in `n_qna.md`): "If you plan to
+  publish this piece in other channels too, now is the moment to create their
+  folders with the same draft — which channels (suffixes)?" For each suffix named,
+  create the sibling folder `N.n<suffix>-code` next to this one with a copy of the
+  draft as `n<suffix>_draft.mkd`; copy nothing else, list the folders created, and
+  continue with the current folder only. Each sibling later runs as its own 1C;
+  restructuring it for its channel is the human's edit of its draft copy. Channel
+  versions differ in structure, so branching at the section files is too late.
 - The skills of 1B know nothing about modes: they act on the plan's status and
   sections (`plan_rules.md`).

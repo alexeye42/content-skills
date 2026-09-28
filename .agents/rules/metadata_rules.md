@@ -5,16 +5,15 @@ trigger: always_on
 # Metadata Rules
 Requirements for an article's title and subtitle (or the post text) and the
 notation for offering alternatives inside the intro file. Reused by the `*4content`
-skills that judge or generate titles. (The outline's own copy of the title
-guidelines stays in `outline_rules.md`.)
+skills that judge or generate titles.
 
 ## Where the metadata lives
 - The **title** is the intro file's top heading; the **subtitle** is the intro's
   `<!-- comment -->` under it.
-- Fallback: the outline's frontmatter (`title:` / `subtitle:`), used only when the
-  intro has neither. The outline is read-only for the skills using this file and may
-  be absent; if both exist and disagree, the intro's version is the current one —
-  note the mismatch in chat.
+- The plan's frontmatter (`plan_rules.md`), when there is a plan, keeps the first
+  version: it goes into the draft and from there into the intro, and is never
+  updated afterwards. It is history, not a fallback — skills using this file ignore
+  it.
 - **Post-text channels** (the channel's `Metadata` field in `profile/audience.md`
   says "post text") have no subtitle: the `<!-- comment -->` under the heading is
   the post itself, written by the rules of *Announce post* below.
@@ -70,5 +69,4 @@ Use `**Post options**` instead of subtitle options for post-text channels.
 ## Selection
 The human either edits the heading/comment by hand or says "title 2" /
 "subtitle 1" / "post 1": the skill puts the chosen text where the item lives in the
-intro file and deletes the callout block. If the title lives only in the outline,
-the skill says so in chat and leaves the outline to the human.
+intro file and deletes the callout block.

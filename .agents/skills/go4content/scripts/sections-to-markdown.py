@@ -16,7 +16,7 @@ def main():
         print(f"Error: The path '{folder_path}' does not exist or is not a folder.")
         return
 
-    md_files = sorted([f for f in os.listdir(full_path) if f.endswith('.md') and not f.endswith('_qna.md')])
+    md_files = sorted([f for f in os.listdir(full_path) if f.endswith('.md') and 'qna' not in f.lower()])
 
     if len(md_files) <= 1:
         print(f"Error: The folder '{folder_path}' must contain more than one .md file.")

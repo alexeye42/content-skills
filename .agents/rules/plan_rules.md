@@ -12,11 +12,17 @@ agent may put into it. The plan is an editorial schema, not a draft. Used by
 status: preliminary | structured | reviewed | checked
 title: <draft title>
 subtitle: <draft subtitle>
+series: standalone | ongoing | final
 ---
 ```
 
-`title` and `subtitle` are required from `structured` on; before that they are
-optional.
+`title`, `subtitle`, and `series` are required from `structured` on; before that they
+are optional.
+- `title` and `subtitle` are the first version: `create-draft-4content` copies them
+  into the draft, and from then on the intro holds the current version
+  (`metadata_rules.md`). They are not updated in the plan afterwards.
+- `series` — whether the article is standalone, a part of a series that continues, or
+  its final part. It decides the conclusion (`article_rules.md`).
 
 ## Statuses
 

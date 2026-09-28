@@ -33,12 +33,14 @@ conclusion ("end" or "conclusion" in the file name).
   - If TLDR is mentioned in the source, generate a `#### TL;DR` subsection: a few short
     paragraphs or numbered list items, each summarizing the essence of the corresponding
     section. At least two paragraphs/items must include internal links to the sections.
-- If this is a conclusion:
-  - Add a heading like `## Conclusion` (or `## What's next?` if this is not the final
-    article of the series).
+- If this is a conclusion (whether the article is part of a series comes from the
+  `series` field of the plan, `plan_rules.md`; without a plan, write it as for a
+  standalone article):
+  - Add a heading like `## Conclusion` (or `## What's next?` for a part of a series
+    that continues).
   - Summarize the whole article from a different perspective than the introduction and
     other sections.
-  - If this is the final article of the series, add a final note as an important
+  - If this is the final article of a series, add a final note as an important
     paragraph. Use a `<placeholder>` if you're unsure about it.
   - After a horizontal rule:
     - Either write about related things outside the scope of this article, followed by a

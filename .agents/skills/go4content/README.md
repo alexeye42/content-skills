@@ -43,15 +43,26 @@ The only files meant for you to edit are the two profile files:
 
 | Case | Your effort | You provide | What the agent does | Skills, in order |
 |---|---|---|---|---|
-| **1A quick** | minimal | `n_dump.mkd` | asks about the gaps, builds the outline, writes the sections; what the dump lacks is written briefly under a `🤖 AI wrote` callout, what only you can supply becomes a `➕ Must add` callout | `create-outline-4content` → `create-sections-4content` |
-| **1B full** | medium | `n_dump.mkd` | optionally, first discusses the ideas with you (rounds of questions, its own ideas, web search for more on request); then an editorial plan you read and edit, the agent's check of it that you react to, a full draft, then outline and sections | [`discuss-ideas-4content` ⇄ `find-ideas-4content`] → `create-plan-4content` (+ `find-facts-4content` on request) → `check-plan-4content` → `create-draft-4content` → `create-outline-4content` → `create-sections-4content` |
-| **1C draft** | maximal | `n_draft.mkd` | outline and sections from your draft (translated to the channel's language if needed, light grammar fixes); if the draft is final, the agent offers to split it into sections **as is** by script instead | `create-outline-4content` → `create-sections-4content` |
+| **1A quick** | minimal | `n_dump.mkd` | asks about the gaps, builds the outline — the points of each section, marked `(AI)` where it will write on its own and `(Must add)` where only you can supply them — waits for your `ok`, then writes the sections; the marked points become `🤖 AI wrote` and `➕ Must add` callouts | `create-outline-4content` → `create-sections-4content` |
+| **1B full** | medium | `n_dump.mkd` | optionally, first discusses the ideas with you (rounds of questions, its own ideas, web search for more on request); then an editorial plan you read and edit, the agent's check of it that you react to, a full draft, then splits it into sections | [`discuss-ideas-4content` ⇄ `find-ideas-4content`] → `create-plan-4content` (+ `find-facts-4content` on request) → `check-plan-4content` → `create-draft-4content` → `create-sections-4content` |
+| **1C draft** | maximal | `n_draft.mkd` | a finished draft is split into sections **as is** by script (long parts without a heading get one first, for your `ok`; translated afterwards if the channel's language differs); a draft of notes to expand gets an outline for your `ok`, then the sections are written from it | `create-sections-4content`, or `create-outline-4content` → `create-sections-4content` |
 
 Start: `/go4content <folder>`. The agent detects the case (`n_draft.mkd`
 present → 1C; the word `discuss` or `full` in your prompt → 1B starting with a
 discussion of the ideas; the word `plan` alone → 1B starting with the plan;
 otherwise 1A) and confirms it in **round 0**, in plain words, together with the
-audience question (custom audience only).
+audience question (custom audience only). For a draft, round 0 also asks about other
+channels and whether to split the draft as is or improve it through an outline.
+
+The outline is the article's structure before any text is written: sections in
+order, each with its points. The agent writes it once, you approve it with `ok`, and
+after the sections exist nobody updates it. A plan-based article (1B) and a finished
+draft have no outline — the draft's own headings are the structure.
+
+The title and subtitle: in 1B the plan holds the first version and keeps it; the
+intro file holds the current one, which stage 2 refines. The plan also records
+whether the article is part of a series — that decides its conclusion. Without a
+plan, the conclusion is written as for a standalone article.
 
 In 1B the plan (`n_plan.mkd`) grows in stages: the discussion writes the thesis and
 the ideas; the plan step adds the structure and marks each idea accepted,
@@ -70,8 +81,8 @@ Prompt words for the individual steps (when you want to run one by hand):
 | Plan | `make a plan`, then `ok` after your review | `n_plan.mkd` (structure) |
 | Plan check | `check the plan`, then `apply` / `apply and stop` | `n_plan.mkd` (checks) |
 | Draft | `write the draft` | `n_draft.mkd` |
-| Outline | `build the outline` | `n_outline.mkd` |
-| Sections | `create section files` (add `as is` to split a final draft verbatim by script) | `n-*.md` |
+| Outline (from a dump or a rough draft) | `build the outline`, then `ok` after your review | `n_outline.mkd` |
+| Sections | `create section files` (add `as is` to split a finished draft verbatim by script) | `n-*.md` |
 | Questions on demand | `ask questions`, `clarify first` | `n_qna.md` |
 
 After the sections exist, go through the callouts (same notation as in stage 2):
@@ -91,14 +102,14 @@ Then move to stage 2.
 ## Second channel
 
 Versions of one article for different channels differ in structure, so they live in
-sibling folders that share the draft, not the sections. When
-`create-outline-4content` outlines a draft (case 1C, or 1B once the draft exists),
-it asks whether you plan other channels; name the suffixes and it creates
-`N.n<suffix>-code/` next to the current folder with a copy of the draft (e.g.
-`1ss_draft.mkd`), nothing else. Finish the current article first, then run
-`/go4content <sibling-folder>`: it takes case 1C, builds that channel's own outline
-and sections (translating the draft if the channel's language differs), and offers
-the same revision stage.
+sibling folders that share the draft, not the sections. Once there is a draft
+(case 1C: in round 0; case 1B: right after the draft), `go4content` asks whether you
+plan other channels; name the suffixes and it creates `N.n<suffix>-code/` next to
+the current folder with a copy of the draft (e.g. `1ss_draft.mkd`), nothing else.
+Reshape each copy for its channel yourself. Finish the current article first, then
+run `/go4content <sibling-folder>`: it takes case 1C, splits that channel's draft
+into sections (translating it if the channel's language differs), and offers the
+same revision stage.
 
 ## Stage 2 — revising the article
 
@@ -185,13 +196,18 @@ by default); `title 2` / `subtitle 1` / `post 1` picks a title option.
 
 ```
 /go4content 207.2m-agent-skills
-   (round 0: "I'll ask about the gaps in your dump and go straight to the section
-    files. Correct?" — the folder has the m suffix, so the audience is not asked)
+   (round 0: "I'll ask about the gaps in your dump, show you an outline to
+    approve, then write the section files. Correct?" — the folder has the m suffix,
+    so the audience is not asked)
 ok
    (the agent asks 4–8 gap questions — main thesis, missing facts, what you will
     write yourself; in the file if you chose "file")
 replied
-   (outline → section files with AI wrote / Must add callouts → "AI edits or your edits?")
+   (the outline: sections and their points, some marked (AI) or (Must add);
+    "edit it or tell me here, then say ok")
+   ... you move one point and turn an (AI) point into your own line ...
+ok
+   (section files with AI wrote / Must add callouts → "AI edits or your edits?")
 A
    (improve4content: file 1 edited; you glance at the diff, fix two sentences)
 next
@@ -238,9 +254,10 @@ apply, except the remark on block 4
 ```
 /go4content 208.1ss-hiring-agents
    (n_draft.mkd is in the folder → "I'll build the sections from your draft.
-    Correct?")
-ok
-   (outline → sections from your draft → "AI edits or your edits?")
+    Correct? Other channels? Your draft looks finished — split it as is
+    (recommended), or improve it through an outline first?")
+as is, no other channels
+   (sections split from your draft, word for word → "AI edits or your edits?")
 B
    (review4content round 0: "split into 3 parts — sections 1–2, 3–4, then intro +
     conclusion. Ok?")

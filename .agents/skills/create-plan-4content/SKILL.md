@@ -35,6 +35,9 @@ Work in the main context (no subagents).
    — a thesis restating an existing idea, a connection between ideas, a possible
    turn — go into these questions as recommendations (*Content rules* in
    `plan_rules.md`). What stays unanswered becomes an `[Insert …]` placeholder.
+   Unless the source or an earlier round already says, the round always includes:
+   "Is this a standalone article, a part of a series that continues, or its final
+   part?" — the answer goes into `series` (step 5).
 
 4. Load `plan_rules.md` + `article_rules.md` + `writing_rules.md` +
    `writing_antipatterns.md` + `audience_rules.md`.
@@ -49,7 +52,8 @@ Work in the main context (no subagents).
    - Structure — build it from the reader's questions and the thesis, not from the
      source's order; the hook, the turn (if any), and the ending are blocks with the
      matching `Role`. Keep every fact and artifact tied to exactly one block.
-   - Frontmatter — draft `title` and `subtitle`; `status: structured`.
+   - Frontmatter — draft `title` and `subtitle` (the first version); `series`;
+     `status: structured`.
 
 6. Commit via `git-commit-flow`, author `ai`.
 

@@ -26,11 +26,12 @@ or any agent that reads skills from a folder.
 
 1. **`go4content` — creation.** `/go4content <folder>` detects one of three cases by
   the effort you want to spend: 
-  - **1A quick** (braindump → gap questions → outline → sections; with `AI wrote` / 
-    `Must add` callouts where the dump had nothing),
+  - **1A quick** (braindump → gap questions → an outline you approve → sections; with
+    `AI wrote` / `Must add` callouts where the dump had nothing),
   - **1B full** (optionally a discussion of your ideas first → an editorial plan you
-    read and edit → the agent's check of it → draft → outline → sections),
-  - **1C draft** (your own draft → outline → sections)
+    read and edit → the agent's check of it → draft → split into sections),
+  - **1C draft** (your own draft → split into sections as is; a draft of notes gets
+    an outline you approve first)
   It ends by handing the article to #2 or #3 flow below.
 2. **`improve4content` — the AI edits, you review.** AI-edited files left as an 
   uncommitted diff for you to read & edit in the IDE; the lessons from your corrections 

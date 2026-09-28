@@ -22,4 +22,4 @@ These rules describe the entire project.
 ```
 python3 .agents/skills/go4content/scripts/sections-to-markdown.py <piece-folder>
 ```
-It concatenates the `*.md` section files in name order (skipping `*_qna.md`, stripping `<delete>` blocks) into `<piece-folder>/dist/<folder-name>.md`. Do not assemble the article by hand.
+It concatenates the `*.md` section files in name order (skipping filenames containing `qna`, case-insensitively, and stripping `<delete>` blocks) into `<piece-folder>/dist/<folder-name>.md`. Do not assemble the article by hand.
