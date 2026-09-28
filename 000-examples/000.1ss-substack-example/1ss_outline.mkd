@@ -1,59 +1,85 @@
----
-layout: article
-title: "AI-powered IDE Beyond Coding: How I Write My Posts"
-subtitle: "An unconventional step-by-step guide for boosting productivity and quality in your AI-assisted writing"
-part: 1
-final: false
----
-
 @0-intro
 
-An overview of using local AI IDEs (Cursor, Trae) for long-form writing, leveraging past context and reusable instructions. Explains why IDEs are compelling beyond coding, contrasts them with chatbots and specialized tools, and sets expectations for the workflow and benefits.
+- The first post of a series on AI workspaces: tools that reuse past context (earlier artifacts, instructions) instead of starting each chat from scratch.
+- Here the artifacts are long-form posts, and the workspace is a local AI IDE — Cursor or Trae.
+- Writing in Cursor is not mainstream yet; there are posts on WHY, almost nothing on HOW (links to two posts).
 
-### 1. My Path To Writing in IDE
+#### Using an IDE for Writing: Why and When
+- What an IDE is; AI made it fit tasks beyond code.
+- Software development tries the newest AI practices first, so they are worth knowing even for non-developers.
+- Where Cursor fits among AI tools (diagram): regular production of complex artifacts in your field.
+- (AI) Even if you don't switch now, know what an AI IDE can do.
+
+### 1. My Path to Writing in an IDE
 @1-path-to-ide
 
-Personal journey from skepticism to adopting Trae IDE for non-coding work. Motivation, prior experience, subscription trigger, and discovery that IDE-driven writing improved readability and changed the author’s writing approach versus chatbot-only workflows.
+- Not a developer, but an analyst and product manager; built small Python apps in Trae over the last year.
+- Six months ago I doubted an IDE for non-coding tasks: too unconventional, and a 30-year-old concept.
+- Bought a $10 Trae subscription for coding, then tried it on readability edits of my articles so it wouldn't go to waste.
+- Writing in an IDE turned out so convenient that it changed my whole approach.
+- Specialized writer tools (Spiral, Jasper AI) cost $25–69 a month — too much for writing I don't earn from.
 
-### 2. Example AI-Powered Writing Workflow
+### 2. AI-Powered Writing: Example Workflow
 @2-workflow
 
-High-level human–AI division of labor: humans focus on creative thinking and validation; AI assists with technical, structured steps. Presents the step-by-step workflow used for long-form pieces.
+- (AI) Which work to delegate to AI when writing a long post.
+- GitHub Copilot docs recommend the IDE's AI for brainstorming, outlining, drafting, refining (link).
+- The writer's effort goes into the creative parts; that is how quality comes without time spent on technical ones.
+- I skip AI brainstorming — my backlog of ideas is large, and a chatbot suits brainstorming better.
+- The six steps in brief (diagram), then each in detail; the same works in Cursor or VS Code with Codex or Claude Code.
 
 #### Step 1. Brain-dumping
-
-Create a folder and `braindump.mkd`. Dictate or write ideas (any language), lightly structure with Markdown, optionally add `<TBD>` tags to mark gaps.
+- A folder and `braindump.mkd`; dictation with Wispr Flow.
+- Dump in your own language; the AI translates later.
+- Light Markdown structure helps; the AI keeps the dump's order, so restructure it first.
+- `<TBD>` tags mark where paragraphs or sections are missing.
 
 #### Step 2. Creating an Outline
-Generate `outline.mkd` from the braindump via the IDE agent; then manually refine the outline. Include `@` lines to define section file names and order.
+- The prompt with a link to the braindump (or the folder).
+- The outline has `@` lines for the section file names.
+- Rethink and improve the outline by hand.
 
 #### Step 3. Generating section files
-
-Use IDE prompts with `outline_rules` and `article_rules` to auto-create section files. Prefer multiple files over a single long draft for quality, focus, and easier targeted edits.
+- The prompt; `outline_rules.md` and `article_rules.md` do the rest.
+- Several files instead of one long draft: quality, focus, targeted edits.
 
 #### Step 4. Expanding and Validating
-
-Expand AI-generated sections where needed, adding missing micro-ideas. Choose manual writing or guided AI expansion; preserve short versions before large edits when useful.
+- Expand the sections the dump described poorly — by hand or with AI.
+- Often by hand: setting the task and validating mediocre output costs more.
+- Validate the whole: length, relevance, flow; decide on web sources and images.
 
 #### Step 5. Committing Before AI Changes
+- Commit before AI edits to snapshot the baseline.
+- `feat:` for the first commit, the article code after the colon; no long descriptions.
+- AI-generated commit messages work for code, not for prose.
 
-Commit work-in-progress to Git to snapshot the baseline. Use concise conventional commit messages and push when appropriate to track upcoming AI edits.
+#### Step 6. AI-Driven Refining and Polishing
+- Enhance files per `article_rules.md`, then review in the side-by-side diff.
+- Word-level highlights; fix the right side, accept paragraph by paragraph, or restore the original.
 
-#### Step 6. AI-Driven Refining / Polishing
-
-Enhance selected files according to `article_rules`. Review diffs side-by-side, accept or reject changes paragraph by paragraph, and restore originals when the AI over-edits.
-
-### Final steps
+### Final Steps
 @3-final-steps
 
-Combine section files into one Markdown via a simple script. Paste into Google Docs using “Paste from Markdown”, then manually insert images and finalize formatting for publication.
+- A Python script combines the section files into one Markdown file — no AI needed.
+- "Paste from Markdown" into Google Docs; insert images by hand.
+- (AI) Tech-savvy readers can automate the images via Markdown-to-HTML and the Google Docs API.
 
 ### The Best AI IDE Features
 @4-best-features
 
-Key advantages: diff-based review of AI edits and reuse of instructions and prior pieces as style/context. Notes on when autocompletion helps (and when it doesn’t) for creative writing.
+- Three reasons for Trae: diff review, reusable instructions, previous articles as style examples.
+- Tab autocompletion gives templated wording in prose — not recommended.
+- Outlining and drafting save time but don't change the game; refining with word-level diff helps most.
+
+#### AI Models to Use for This Workflow
+- Refining: Gemini Pro — only essential changes, natural English; weak at outlining.
+- Earlier steps: Claude Sonnet, until it left Trae in November 2025; now GPT-5 High.
+- (Must add) GPT-5 pitfalls on a draft (not a dump): dropped links, lost emotion.
 
 ### Conclusion
-@conclusion
+@5-conclusion
 
-AI IDEs enable a practical, repeatable workflow for long-form writing: they streamline technical steps while preserving author creativity, resulting in clearer, faster, and more consistent posts.
+- Similar workflows fit less software-oriented workspaces; for simpler ones an IDE is too heavy.
+- A link to my comparison of an IDE vs. ChatGPT on four criteria.
+- Next posts: IDEs vs. Google Workspace and Microsoft 365.
+- The `<subscribe>` call.
