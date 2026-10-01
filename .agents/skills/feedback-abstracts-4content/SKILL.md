@@ -36,10 +36,11 @@ fixed. Delegates the prose work to `feedback-4content`.
    notation* of that file. Report the scores in chat as a separate line (inside
    `review4content` they stay out of its per-section table).
    The announce post (`metadata_rules.md`, *Announce post*): on a post-text
-   channel it replaces the subtitle and is handled here every time; on other
-   channels only on request ("write the post" / "check the post"). Write it in the
-   intro comment, or proofread the existing one and report in chat what the
-   channel's audience may misread. The human edits it by hand, no options block.
+   channel it is the post text itself, judged and offered as `Post options` above
+   every time. On other channels it is handled only on request ("write the post" /
+   "check the post"): write it under the subtitle comment, or proofread the
+   existing one and report in chat what the channel's audience may misread; the
+   human edits it by hand, no options block.
 
 4. **Selection.** As in `metadata_rules.md`: the human edits by hand or says
    "title 2" / "subtitle 1" / "post 1"; apply and delete the callout block.
@@ -48,5 +49,5 @@ fixed. Delegates the prose work to `feedback-4content`.
 
 - On request ("re-score the title"), judge the current title/subtitle again — score
   only, no new options — so the orchestrator gets a "new" value for its final table.
-- The review markup is committed by the caller (`review4content`). Apply, accept,
-  revert and remove-markup commands work (and commit) as in `feedback-4content`.
+- The review markup is committed by the caller (`review4content`). Apply and
+  remove-markup commands work (and commit) as in `feedback-4content`.

@@ -16,13 +16,16 @@ research data in context.
 
 ## Steps
 
-1. Read `n_plan.mkd` (format: `plan_rules.md`). It must exist with the Thesis and
-   Ideas sections; otherwise say that the ideas have to be discussed first
-   (`discuss-ideas-4content`) and stop. Read the sources it lists.
+1. Read `n_plan.mkd` (format: `plan_rules.md`). It must be `preliminary`, with the
+   Thesis and Ideas sections: no plan or no Ideas — say that the ideas have to be
+   discussed first (`discuss-ideas-4content`) and stop; `structured` or later — the
+   ideas are already marked, so say that facts for a built plan come from
+   `find-facts-4content` and stop. Read the sources it lists.
 2. Derive 4–8 search questions from the Thesis and the Ideas — not generic reader
    questions:
    - which ideas need evidence or a source to cite;
-   - what objections a reader would raise against the thesis, and what answers them;
+   - what objections a reader of the piece's audience (`audience_rules.md`,
+     *Resolving the audience*) would raise against the thesis, and what answers them;
    - what non-obvious angles, cases, or examples the topic has that the plan lacks;
    - where studies or models are limited, so the article doesn't overclaim.
    If the human said what they want found, focus on that. Start a new run block in
@@ -42,7 +45,7 @@ research data in context.
      `(findings: <URL>)`, written as an idea, not as a quote.
    Do not change the existing ideas or the Thesis; the human decides in the next
    round.
-6. Report in chat in 2–4 lines: how many ideas were added and the strongest one or
+6. Report in chat briefly: how many ideas were added and the strongest one or
    two.
 
 ## n_findings.mkd format
@@ -53,7 +56,7 @@ appends its own block and never edits earlier blocks.
 
 ```markdown
 Topic: <topic>
-Audience: <the plan's audience, if stated>
+Audience: <from audience_rules.md, with the channel>
 
 ## Run <YYYY-MM-DD> — find-ideas
 

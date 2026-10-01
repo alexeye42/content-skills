@@ -19,7 +19,9 @@ content rules are in `outline_rules.md`. Mainly invoked from `go4content`.
    `create-sections-4content` (step 2.1) is outlined only if the human asked to
    improve it; otherwise offer the split and stop. Resolve the audience per
    `audience_rules.md` (*Resolving the audience*); if it is unresolved, report
-   "audience unresolved" and stop.
+   "audience unresolved" and stop. If `n_outline.mkd` exists and section files are
+   already in the folder, stop too: the outline is past its gate (`outline_rules.md`,
+   *Lifecycle*); point to `create-sections-4content` (step 4).
 
 2. **Gap questions (a braindump, or a rough draft with `<TBD>` / `<TODO>` gaps).**
    Ask through `qna-manager` — as the next round of `n_qna.md` — about the main
@@ -28,10 +30,8 @@ content rules are in `outline_rules.md`. Mainly invoked from `go4content`.
    them, so the human does not review a structure the answers would still change.
 
 3. **Write `n_outline.mkd`** per `outline_rules.md`.
-   - If it already exists: when section files are already in the folder, stop — the
-     outline is past its gate (`outline_rules.md`, *Lifecycle*); point to
-     `create-sections-4content` (step 4). Otherwise treat it as the human's start:
-     keep its headings, points, and marks, and add only what is missing.
+   - If it already exists (with no section files yet), treat it as the human's
+     start: keep its headings, points, and marks, and add only what is missing.
    - Sections: take the source's headings; where the source has none, add a heading
      for any chunk over 400 words or one that mixes weakly related topics, in natural
      language.
@@ -41,7 +41,13 @@ content rules are in `outline_rules.md`. Mainly invoked from `go4content`.
      no number (`@0-intro`, `@3-final-steps`).
    - Under each heading, the points in order with their origin marks — unmarked,
      `(AI)`, `(Must add)`. Mark honestly: every thought that neither the source nor
-     the Q&A answers contain is `(AI)` or `(Must add)`, never unmarked.
+     the Q&A answers contain is `(AI)` or `(Must add)`, never unmarked. `(AI)` covers
+     connective text only (lead-ins, transitions, short explanations); a fact, number,
+     example, or tool name the source lacks is `(Must add)`. An unmarked point names
+     the source's thought without polishing it: polished wording leaks into the
+     sections.
+   - Every thought of the source lands in a point, or is listed in chat at the gate
+     as left out: the outline is the human's only coverage check before text exists.
    - Source tags (`format_rules.md`, *Angle-bracket tags*): `<TBD>` → an `(AI)`
      point; `<TODO>` → a `(Must add)` point; drop the content of `<DELETE>`, `<note>`,
      `<ai>`.
@@ -57,14 +63,6 @@ content rules are in `outline_rules.md`. Mainly invoked from `go4content`.
    return.
 
 ## Notes
-- NEVER drop or merge away a source thought to tidy the structure: every idea of the
-  source lands in a point, or is listed in chat at the gate as left out — the outline
-  is the human's only coverage check before text exists.
-- NEVER polish unmarked points: a point names the source's thought; polished wording
-  leaks into the sections.
-- NEVER put a fact, number, example, or tool name in an `(AI)` point — that is
-  `(Must add)`; `(AI)` covers connective text only (lead-ins, transitions, short
-  explanations).
 - The outline is written once: after the gate, never update it (`outline_rules.md`,
   *Lifecycle*).
 - No title in the outline: `create-sections-4content` writes the first version into

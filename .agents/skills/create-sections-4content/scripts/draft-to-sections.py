@@ -92,7 +92,7 @@ CYRILLIC = dict(zip(
     ["a", "b", "v", "g", "d", "e", "e", "zh", "z", "i", "y", "k", "l", "m", "n",
      "o", "p", "r", "s", "t", "u", "f", "kh", "ts", "ch", "sh", "shch", "", "y",
      "", "e", "yu", "ya"]))
-CONCLUSION_RE = re.compile(r"conclusion|what'?s next|заключение|итоги|выводы|что дальше")
+CONCLUSION_RE = re.compile(r"conclusion|what(['’]?s| is) next|заключение|итоги|выводы|что дальше")
 
 
 def slugify(text, max_words=3):

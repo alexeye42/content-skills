@@ -52,8 +52,8 @@ Delegates to: `feedback-4content` (a part), `feedback-abstracts-4content` (frami
       see *Commands*). Wait for the signal ("done", "I edited it").
    4. Commit via `git-commit-flow`, author `human`.
    5. **Diff lessons:** `git diff` of the two commits (without git: compare the files
-      with the versions you marked up, still in context). Post 3–5 lines of PATTERNS to
-      chat — not individual phrases: which callouts were accepted, which were
+      with the versions you marked up, still in context). Post a few lines of
+      patterns to chat — not individual phrases: which callouts were accepted, which were
       ignored (and what they had in common), where strictness was off, what the
       author does with long sentences, and so on. Keep these patterns for the next
       parts; write nothing to files.

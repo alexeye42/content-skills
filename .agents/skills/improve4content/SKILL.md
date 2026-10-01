@@ -40,7 +40,7 @@ Delegates to: `improve-article-4content` (one file), `git-commit-flow` (commits)
       "done", etc.). The human may edit the file meanwhile.
    4. **Lessons.** Re-read the file and compare it with the version you produced
       (still in context): what the human reverted, softened, or rewrote, and what
-      they left alone. Post 3–5 lines of PATTERNS to chat (not phrases) and carry
+      they left alone. Post a few lines of patterns to chat (not phrases) and carry
       them into the next file's instructions. Write nothing to files.
 
 4. **Title, subtitle, post.** After the last file, judge the current title/subtitle (or

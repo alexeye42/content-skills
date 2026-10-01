@@ -83,7 +83,8 @@ Q2: <explanation + question>
 A2:
 ```
 
-Rounds are numbered consecutively across the file.
+Rounds are numbered consecutively across the file. Earlier rounds and the human's
+answers are never rewritten or cleaned up: they are the decision history.
 
 Callers may keep their own fixed sections right under the file title (e.g. the
 `## Audience` section of `audience_rules.md`); this skill never writes or edits
@@ -99,15 +100,10 @@ human reacts.
 
 ## Waiting and resuming
 
-- File channel: write the file, then tell the user in chat:
+- File channel: write the questions only to the file, then tell the user in chat:
   > Questions are in `<path>`. Answer inline and type "replied" when done.
   Stop and wait. On resume, scan for blank `An:` items in ALL rounds; if any, list
-  them and ask the user to fill them in before proceeding.
+  them and ask the user to fill them in before proceeding; never fill one in
+  yourself.
 - Tool/chat channel: wait for the answers, then record the round.
 - Return the answers to the caller in a compact form (question id → answer).
-
-## Anti-patterns
-
-- Never print questions to chat when the channel is the file.
-- Never rewrite or "clean up" earlier rounds or the human's answers.
-- Never invent an answer for a blank item.

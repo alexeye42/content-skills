@@ -78,5 +78,4 @@ Sources: <URL1>, <URL2>
 - Don't invent facts — everything must be confirmed by search.
 - Don't rely on training data for specific facts, numbers, prices, or dates.
 - If sources conflict, record both variants with their URLs.
-- Aim for ~10–15 searches per run; don't pad for the sake of count.
 - Write nothing into `n_plan.mkd`; the plan takes facts from `n_findings.mkd`.

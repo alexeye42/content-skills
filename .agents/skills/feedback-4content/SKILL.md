@@ -1,6 +1,6 @@
 ---
 name: feedback-4content
-description: Give inline feedback on 1–3 section files of an article (callouts + ==highlights==, per-section scores in chat), apply or clean that feedback on command, or score sections only. Use when the prompt says "give feedback", "review the section", "apply feedback", "score the sections"; also invoked by review4content and go4content.
+description: Give inline feedback on 1–3 section files of an article (callouts + ==highlights==, per-section scores in chat), apply or clean that feedback on command, or score sections only. Use when the prompt says "give feedback", "review the section", "apply feedback", "score the sections"; also invoked by review4content and feedback-abstracts-4content.
 ---
 
 # Feedback (4content)
@@ -82,8 +82,7 @@ For each section, three criteria on a 1–10 scale:
 
 1. **Readability** — sentences and cohesion.
 2. **Wording** — choice of words and expressions, judged as a native editor would
-   (the author's native language and voice: *Author* in the profile referenced from
-   `profile/editorial.md`).
+   (the author's native language and voice: `profile/audience.md`, *Author*).
 3. **Usefulness for the audience** — what the reader takes away: a decision or an
    action from some sections, understanding and the bigger picture from others.
    Both count. With personas, give one score per persona: `8/7`.

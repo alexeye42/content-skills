@@ -22,7 +22,7 @@ Outline rules: `outline_rules.md`; generate content per `article_rules.md` +
    - Section files already exist: with an outline → step 4 (update); without one →
      list them and ask the human whether to re-split or stop. Re-splitting needs
      `--force`, which overwrites only files of the same name, so delete the old files
-     first (with the human's yes).
+     first — only with the human's yes: they may already carry the human's edits.
    - An outline exists → step 3. If it has no `@section-code` lines, warn and stop.
    - No outline, a draft exists → step 2.
    - Neither → error: "Nothing to create sections from — run `create-outline-4content`
@@ -52,7 +52,9 @@ Outline rules: `outline_rules.md`; generate content per `article_rules.md` +
       and wait for the human's "ok" — they may fix them in the file first. On "ok",
       commit the draft (`human/ai` if they edited it, otherwise `ai`), so the split
       commit holds only the new files.
-   3. **Split** by script, from the project root:
+   3. **Split** by script, from the project root. The split is verbatim: polishing
+      belongs to stage 2 (`improve4content` / `review4content`), and a mixed commit
+      hides what changed.
       ```
       python3 <this skill's folder>/scripts/draft-to-sections.py <folder>/n_draft.mkd
       ```
@@ -80,7 +82,9 @@ Outline rules: `outline_rules.md`; generate content per `article_rules.md` +
    - `(Must add)` point → a `➕ **Must add:**` callout with a one-line note of what is
      needed, never invented.
 
-   Notation: *Agent callouts* in `format_rules.md`. Do NOT create image references.
+   Notation: *Agent callouts* in `format_rules.md`. Every `(AI)` and `(Must add)`
+   point keeps its callout: the callouts are the human's only map of what to check.
+   No image references.
    The intro file starts with the title as its top `#` heading and the subtitle as a
    `<!-- comment -->` under it — the first version, written from the content
    (`metadata_rules.md`; the channel's post-text rule applies).
@@ -89,13 +93,3 @@ Outline rules: `outline_rules.md`; generate content per `article_rules.md` +
    the files for `@section-code` lines that have no file yet, as in step 3. Leave the
    existing files untouched — they are the current text (`outline_rules.md`,
    *Lifecycle*).
-
-## Never
-- Never edit the text while splitting: the split is verbatim, and polishing belongs
-  to stage 2 (`improve4content` / `review4content`). A mixed commit hides what
-  changed.
-- Never split by hand, and never run `--force` over existing files without the
-  human's yes — they may already carry the human's edits.
-- Never fill a `(Must add)` point or drop the callout of an `(AI)` point: the
-  callouts are the human's only map of what to check.
-- Never update the outline: after the gate the section files are the current text.

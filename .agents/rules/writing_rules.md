@@ -1,6 +1,6 @@
 ---
 trigger: model_decision
-description: General writing quality for any English content — apply when writing, rewriting, translating, or editing prose. See writing_antipatterns.md for the marker checklist.
+description: General writing quality for any content — apply when writing, rewriting, translating, or editing prose. See writing_antipatterns.md for the marker checklist.
 globs: ["**/*.md", "**/*.mkd"]
 ---
 
@@ -17,29 +17,30 @@ The final judge is whether a paragraph reads like a native speaker talking to a 
 ## Content Requirements
 
 ### When translating or re-writing
+The text is in the piece's target language (`audience_rules.md`, *Resolving the
+language*) and sounds natural to its native speakers.
 - Accurately convey not only the literal meaning, but also nuances and tone.
-- If some parts of the text are not in English, translate them into English.
+- If some parts of the text are not in the target language, translate them into it.
 - When re-writing:
-  - Re-write ONLY sentences that are hard to read, poorly written, redundant, or
+  - Re-write only sentences that are hard to read, poorly written, redundant, or
     repetitive — to improve clarity and make them sound better.
-  - Enrich the vocabulary and sometimes use idioms, especially semi-formal ones.
-    Use an idiom ONLY ONCE per paragraph or list, and keep it comprehensible to
-    non-native English speakers.
+  - Enrich the vocabulary and sometimes use idioms, especially semi-formal ones:
+    at most one idiom per paragraph or list, comprehensible to non-native
+    speakers when the text is in English.
   - Check the text for spelling, grammatical, and punctuation errors and fix them.
-  - IMPORTANT: make as little change to the original text as possible, following
-    ONLY the requirements here.
-- Have a final read and ensure everything sounds good for native English speakers.
+  - Change as little of the original text as possible: the text is the author's,
+    and the requirements here are the only reasons to touch it.
 
-### Anti-Fluff Policy (strict constraints on rewriting)
-- **Be concise:** do NOT aim for longer expressions. Keep the text as short as
+### Anti-Fluff Policy (rewriting)
+- **Be concise:** prefer the shorter expression. Keep the text as short as
   possible while fully preserving the original meaning and details.
-- **No fluff adverbs/adjectives:** do NOT add filler words for emphasis (e.g.
+- **No fluff adverbs/adjectives:** add no filler words for emphasis (e.g.
   "exactly", "practically", "safely", "effectively", "various", "pure", "sheer").
-- **Keep it simple:** do NOT replace simple, clear words with overly complex or
-  formal ones (e.g. "massive" → "exorbitant", "much" → "considerably").
-- **Preserve terminology:** do NOT use synonyms just to avoid repeating a word.
-  Consistent terminology (e.g. repeating "step" instead of switching to "stage")
-  is crucial for technical clarity.
+- **Keep it simple:** keep simple, clear words rather than replacing them with
+  complex or formal ones (e.g. "massive" → "exorbitant", "much" → "considerably").
+- **Preserve terminology:** repeat a term rather than switch to a synonym to avoid
+  the repetition. Consistent terminology (e.g. repeating "step" instead of
+  switching to "stage") is crucial for technical clarity.
 
 ## When writing from scratch
 
@@ -92,6 +93,3 @@ If the prompt does NOT contain "samples:", use these when translating/re-writing
 - Strive for contextually appropriate, engaging text.
 - Pay attention to idiomatic expressions and wordplay, preserving the essence of
   the original.
-
-## Final check
-Run the checklist in `writing_antipatterns.md` over the result.

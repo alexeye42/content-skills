@@ -28,9 +28,10 @@ Work in the main context (no subagents).
 2. **One round of questions**, 3–5 of them, through `qna-manager` as the next round
    of `n_qna.md`. The explanations are your substantive contribution: new ideas,
    merges of ideas, weak spots, objections a reader of this audience would raise,
-   thesis variants. Each question carries your recommendation, so "yes" is a complete
-   answer. Add your new ideas to the plan's Ideas section right away, with the
-   source `(agent)`, so the human sees them in the plan too.
+   thesis variants. Don't retell the dump: the human wrote it, and every round adds
+   something they did not have. Each question carries your recommendation, so "yes"
+   is a complete answer. Add your new ideas to the plan's Ideas section right away,
+   with the source `(agent)`, so the human sees them in the plan too.
 
 3. Commit via `git-commit-flow`, author `ai`. Wait for the answers.
 
@@ -64,17 +65,13 @@ Work in the main context (no subagents).
 
 ## Rules
 - Facts come only from the sources; ideas may be new (`plan_rules.md`, *Content
-  rules*).
-- NEVER open with a summary of the human's dump: they wrote it. Every round must
-  add something they did not have.
-- NEVER turn the ideas into sections or an order yet: a dump's order is rarely the
-  article's order, and fixing it early kills the merges.
-- NEVER let an `(agent)` idea carry a number, a study, or a name: a new idea is
-  reasoning; its facts come from the sources or from a search.
-- NEVER state a claim about AI (or any fast-moving field) as a limit in principle
-  when the source only supports "today's models" or "at today's cost" — readers
-  will refute it with the next release.
-- Do not write Structure and do not mark ideas — both belong to
-  `create-plan-4content`.
+  rules*). An `(agent)` idea is reasoning: its numbers, studies, and names come from
+  the sources or from a search.
+- State a claim about AI (or any fast-moving field) only as far as the source
+  supports it — "today's models", "at today's cost" — not as a limit in principle:
+  readers will refute it with the next release.
+- No structure yet — no sections, no order, no marks on ideas: a dump's order is
+  rarely the article's order, and fixing it early kills the merges. Structure and
+  marks belong to `create-plan-4content`.
 - No log of the reasoning: the current state is the plan, the decisions are the
   rounds of `n_qna.md`.

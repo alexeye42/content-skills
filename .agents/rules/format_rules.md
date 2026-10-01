@@ -1,6 +1,6 @@
 ---
 trigger: model_decision
-description: Markdown formatting and placeholder conventions for all content types. Per-type files may override defaults (e.g. heading levels). Applies only to final artifacts (sections or whole pieces) — does not apply to intermediate markdown files like outlines or drafts (they're usually named *.mkd rather than *.md)
+description: Markdown formatting and placeholder conventions for all content types. Per-type files may override defaults (e.g. heading levels). Applies to section files, whole pieces, and drafts (a draft is split into sections as is); outlines, plans, and other working *.mkd files follow their own rules
 globs: ["**/*.md"]
 ---
 

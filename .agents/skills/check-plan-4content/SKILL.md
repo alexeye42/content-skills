@@ -8,8 +8,9 @@ description: Adversarially check a content plan (n_plan.mkd) in two steps - mark
 Adversarial check of `n_plan.mkd`, split into two steps with the human's feedback
 between them: first the findings are marked up in the plan, then the plan is
 rewritten by the human's reaction. Format, statuses, and content rules:
-`plan_rules.md`. Work in the main context — do not delegate; you won't break the
-gathered facts.
+`plan_rules.md`.
+
+Work in the main context (no subagents).
 
 ## Criteria
 
@@ -35,7 +36,9 @@ new ideas.
 
 ## Step 1 — Check
 
-1. Read `n_plan.mkd` in full and the sources it lists. By status:
+1. Read `n_plan.mkd` in full and the sources it lists. Resolve the audience per
+   `audience_rules.md` (*Resolving the audience*): criterion 2 is judged for it. By
+   status:
    - `reviewed` — go on;
    - `structured` — the human has not read the plan yet: say so and offer to wait
      for their review; go on if they say so;
@@ -65,4 +68,4 @@ Triggered by "apply" (with optional exclusions: "apply except the finding on blo
 3. Write the `## Checks` section per `plan_rules.md`: per criteria group, a one-line
    verdict and what was changed, declined, or left as `[Insert …]`.
 4. Set `status: checked`. Commit via `git-commit-flow`, author `ai`.
-5. Report in chat in 2–4 lines: what changed in the plan and what stays open.
+5. Report in chat briefly: what changed in the plan and what stays open.

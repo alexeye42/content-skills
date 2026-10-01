@@ -17,7 +17,7 @@ Work in the main context (no subagents).
 1. **Inputs.** Resolve the audience per `audience_rules.md` (*Resolving the
    audience*). Check `n_plan.mkd`:
    - `preliminary` — build from it: its Source & facts, Thesis, and Ideas are the
-     material; read the sources it lists as well.
+     material; read the sources it lists and `n_findings.mkd`, if present, as well.
    - absent — build from the source in the prompt (usually `n_dump.mkd`) and any
      `n_findings.mkd` in the folder.
    - `structured` or later — the plan is already built: say so and stop, unless the
@@ -27,7 +27,8 @@ Work in the main context (no subagents).
    (question tool, or chat), in the language of the user's prompt: "Do you want me
    to find links on the web that support your ideas, examples that illustrate them,
    or other facts?" On yes, run `find-facts-4content` with what the human wants
-   found, then continue. On no, build the plan from what there is.
+   found; its new run in `n_findings.mkd` is material for the plan and one of its
+   sources. On no, build the plan from what there is.
 
 3. **Gap questions.** If the material leaves the plan under-determined (missing facts
    or numbers, an unclear thesis, placeholders, contradictions), ask through
@@ -46,12 +47,17 @@ Work in the main context (no subagents).
    - Source & facts — list every source used; extract the key themes, numbers,
      facts, tool names, and artifacts.
    - Thesis — write it if missing; keep the discussed one otherwise, unless the gap
-     answers changed it.
+     answers changed it. The thesis is a claim a reader could disagree with, not a
+     topic ("AI agents and people at work"): the blocks need something to converge on.
    - Ideas (if the section exists) — mark every idea `[Accepted]`, `[Transformed]`,
-     `[Parked]`, or `[Rejected]`; never edit its text.
+     `[Parked]`, or `[Rejected]`; never edit its text. A strong idea that does not
+     fit the structure is `[Parked]`, not `[Rejected]`, so the human sees it at the
+     review.
    - Structure — build it from the reader's questions and the thesis, not from the
      source's order; the hook, the turn (if any), and the ending are blocks with the
-     matching `Role`. Keep every fact and artifact tied to exactly one block.
+     matching `Role`. Every block supports the thesis, answers an objection, or turns
+     it; there is no default "background" or "context" block. Keep every fact and
+     artifact tied to exactly one block.
    - Frontmatter — draft `title` and `subtitle` (the first version); `series`;
      `status: structured`.
 
@@ -67,9 +73,3 @@ Work in the main context (no subagents).
 - Facts come only from the sources; no new ideas at this step — only connections
   and restatements of existing ones (`plan_rules.md`, *Content rules*).
 - Don't write "nice phrasings" — the plan is a schema; phrasings belong in the draft.
-- NEVER write the thesis as a topic ("AI agents and people at work"): it must be a
-  claim a reader could disagree with, or the blocks have nothing to converge on.
-- NEVER give a block the `Role` "background" or "context" by default: a block
-  either supports the thesis, answers an objection, turns it, or goes.
-- NEVER mark an idea `[Rejected]` silently for being inconvenient to the structure:
-  if it is strong, it is `[Parked]` and the human sees it at the review.

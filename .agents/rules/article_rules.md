@@ -13,7 +13,8 @@ Per-type rules for long-form articles. They sit on top of the general rules:
 
 ## Usage
 Whatever the action on the file (enhancing, drafting, writing sections), you must:
-- meet the Content Requirements from `writing_rules.md`;
+- meet `writing_rules.md` — its part for the action (writing from scratch or
+  re-writing) and the common rules;
 - meet the formatting in `format_rules.md`, with the heading override below;
 - match the audience and channel voice from `audience_rules.md` (channel by suffix).
 
@@ -28,16 +29,17 @@ Determine whether the `*.md` file is an introduction ("intro" in the file name) 
 conclusion ("end" or "conclusion" in the file name).
 
 - If this is an introduction:
-  - The `###` heading is optional.
+  - A top-level heading is optional.
   - The first 2 paragraphs must be a) short and b) as engaging and intriguing as possible.
-  - If TLDR is mentioned in the source, generate a `#### TL;DR` subsection: a few short
-    paragraphs or numbered list items, each summarizing the essence of the corresponding
-    section. At least two paragraphs/items must include internal links to the sections.
+  - If TLDR is mentioned in the source, generate a `TL;DR` subsection at the channel's
+    subsection level: a few short paragraphs or numbered list items, each summarizing
+    the essence of the corresponding section. At least two paragraphs/items must
+    include internal links to the sections.
 - If this is a conclusion (whether the article is part of a series comes from the
   `series` field of the plan, `plan_rules.md`; without a plan, write it as for a
   standalone article):
-  - Add a heading like `## Conclusion` (or `## What's next?` for a part of a series
-    that continues).
+  - Add a top-level heading like `Conclusion` (or `What's next?` for a part of a
+    series that continues), at the channel's level.
   - Summarize the whole article from a different perspective than the introduction and
     other sections.
   - If this is the final article of a series, add a final note as an important

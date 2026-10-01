@@ -20,14 +20,10 @@ You must follow:
 
 1. Identify the target files. Edit ONLY the `*.md` / `*.mkd` files explicitly
    referenced in the prompt.
-2. For each target file, apply the Content Requirements from `writing_rules.md` and the
-   article-specific rules from `article_rules.md`. Match the channel voice from
-   `audience_rules.md`.
+2. For each target file, apply `writing_rules.md` (with `writing_antipatterns.md`)
+   and the article-specific rules from `article_rules.md`, and match the channel
+   voice from `audience_rules.md`. The result sounds natural to native speakers of
+   the piece's target language (`audience_rules.md`, *Resolving the language*),
+   with only the necessary changes.
 3. Ensure proper markdown per `format_rules.md`, applying the article heading-level
    override from `article_rules.md`.
-4. Read through the edited text to ensure:
-   - it sounds natural to native speakers of the piece's target language
-     (`audience_rules.md`, *Resolving the language*);
-   - all requirements are met;
-   - changes are minimal and necessary.
-5. Run the `writing_antipatterns.md` checklist over the result.
