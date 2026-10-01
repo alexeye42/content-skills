@@ -1,6 +1,7 @@
 # Claude Instructions
-Claude and Cursor read `.agents/skills` and `.agents/rules` through the links
-`.claude/skills` and `.claude/rules`, created once by `scripts/setup-claude.*`.
+Claude and Cursor read `.agents/skills` through the link `.claude/skills`, created
+once by `scripts/setup-claude.*`. Rules are read from `.agents/rules` when a skill or
+this file names them.
 
 The project is about writing texts in markdown with the `*4content` skills,
 not program code.

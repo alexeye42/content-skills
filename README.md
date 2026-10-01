@@ -77,9 +77,12 @@ one.
    Your articles and the skills live in different folders, so the merges stay
    clean as long as you edit only your profile and your pieces.
 
-2. **Claude Cowork/Code, Cursor:** run the setup script once — it creates `.claude/skills` 
-   and `.claude/rules` pointing to `.agents/skills` and `.agents/rules` (symlinks on
-   macOS/Linux, directory junctions on Windows, no admin rights needed):
+2. **Claude Cowork/Code, Cursor:** run the setup script once — it creates `.claude/skills`
+   pointing to `.agents/skills` (a symlink on macOS/Linux, a directory junction on
+   Windows, no admin rights needed). The rules get no link on purpose: the agent
+   reads them from `.agents/rules` when a skill or the instruction file names them,
+   while Claude Code would load everything in `.claude/rules` into every session.
+   If an earlier version of the script created `.claude/rules`, delete that link.
    ```
    scripts/setup-claude.sh          # macOS / Linux
    scripts\setup-claude.cmd         # Windows, cmd
@@ -108,7 +111,8 @@ one.
 
 **Adding the skills to an existing project instead:** copy `.agents/skills/*` and
 `.agents/rules/*` into your project's skills and rules folders (Claude Code:
-`.claude/skills`, `.claude/rules`), and append the *Rules* and *Git commits*
+`.claude/skills` for the skills, and for the rules any folder except `.claude/rules`,
+which Claude Code loads into every session), and append the *Rules* and *Git commits*
 sections of this repository's `AGENTS.md` to your `CLAUDE.md` / `AGENTS.md`. The
 skills refer to rules by bare file name and to their own scripts relative to the
 skill folder, so any layout works as long as the instruction file names the rules

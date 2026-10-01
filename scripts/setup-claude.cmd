@@ -1,10 +1,11 @@
 @echo off
-rem Creates .claude\skills and .claude\rules as directory junctions to .agents\skills
-rem and .agents\rules, so Claude and Cursor read the same files as Codex and Antigravity.
-rem Junctions need no admin rights. Run once after cloning: scripts\setup-claude.cmd
+rem Creates .claude\skills as a directory junction to .agents\skills, so Claude and
+rem Cursor read the same skills as Codex and Antigravity. The rules get no link: Claude
+rem Code would load everything in .claude\rules into every session, while the skills
+rem name the rules they need. Junctions need no admin rights. Run once after cloning: scripts\setup-claude.cmd
 cd /d "%~dp0.."
 if not exist ".claude" mkdir ".claude"
-for %%d in (skills rules) do (
+for %%d in (skills) do (
   if exist ".claude\%%d" (
     echo .claude\%%d already exists - skipped
   ) else (
