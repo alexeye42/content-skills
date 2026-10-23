@@ -40,4 +40,4 @@ For a Google Doc, also run:
 ```
 python3 .agents/skills/go4content/scripts/html-to-gdoc.py <piece-folder>/dist/<folder-name>.html
 ```
-It creates a new doc named `<piece code> <title>` (e.g. `205.1m Vibe Coding Large Systems: …`) in the Drive folder from `GO4CONTENT_GDOC_FOLDER` (or `--folder <id-or-url>`), with highlighted `[IMAGE: file]` placeholders instead of images, and prints the doc link. Every run creates a new doc; it does not update an earlier one. If it fails for a missing OAuth client or folder, point the human to *Google Docs export* in the go4content README instead of working around it.
+It creates a new doc named `<piece code> <title>` (e.g. `207.2m Agent Skills: …`) in the Drive folder from `GO4CONTENT_GDOC_FOLDER` (or `--folder <id-or-url>`), with highlighted `[IMAGE: file]` placeholders instead of images, and prints the doc link. Every run creates a new doc; it does not update an earlier one. If it fails for a missing OAuth client or folder, point the human to *Google Docs export* in the go4content README instead of working around it.

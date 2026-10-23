@@ -9,7 +9,9 @@ argument-hint: <piece-folder> [variant_of=<entry>]
 `CONTENT.md` in the project root is the content base: the topics and the pieces with
 their statuses and dates. Its format is its own `## Properties` section; read it
 first. If `CONTENT.md` does not exist, do nothing and return: the project does not
-keep a content base.
+keep a content base. To start one, the human copies `references/CONTENT-template.md`
+from this skill's folder to the project root as `CONTENT.md` and deletes its sample
+entries.
 
 Input: one piece folder `<topic>/<N.n-code>`; optionally `variant_of` — the entry
 heading of the piece this folder is a channel version of (`go4content`, *Other
@@ -38,7 +40,7 @@ the topic folders (`000-*` excluded), one commit for all.
    `draft_date`, `written_date`) to today, unless it is already set.
 
 3. **Summary.** Write it when the entry has none or the status was raised: 1–2
-   English sentences with the main thesis, from `n_outline.mkd`, else `n_plan.mkd`
+   sentences with the main thesis, from `n_outline.mkd`, else `n_plan.mkd`
    (its Thesis), else the intro of `n_draft.mkd` or of the section files, else
    `n_dump.mkd`.
 

@@ -45,7 +45,8 @@ or any agent that reads skills from a folder.
 Behind them are eleven content processing skills, `qna-manager` for asking questions
 and storing your answers, `git-commit-flow` for commit automation, and
 `sync-4content`, which keeps an optional content base `CONTENT.md` in step with your
-files (it does nothing until you create one). How the skills fit together, in
+files (it does nothing until you create one: copy
+`.agents/skills/sync-4content/references/CONTENT-template.md` to the root as `CONTENT.md`). How the skills fit together, in
 diagrams: `.agents/skills-doc/README.md`. Prompt words, 
 the markup notation, commands, and example sessions: `.agents/skills/go4content/README.md`.
 
