@@ -68,6 +68,7 @@ Delegates to: `feedback-4content` (a part), `feedback-abstracts-4content` (frami
    title/subtitle line separately. "Initial" is always the score from the part's
    FIRST review pass — a redo never overwrites it. 
    Under it, list the cross-cutting problems that remain, if any.
+   Run `sync-4content` on the folder.
    Finally, check if any markup is left in the files; if no, propose to assemble 
    the whole article into one file.
 

@@ -50,7 +50,8 @@ Delegates to: `improve-article-4content` (one file), `git-commit-flow` (commits)
    announce post as in `feedback-abstracts-4content` step 3 (post-text channels
    always, others on request).
 
-5. **Finish.** Commit check as in 3.1 (author `human/ai`). Report in chat: files
+5. **Finish.** Commit check as in 3.1 (author `human/ai`), then run `sync-4content`
+   on the folder. Report in chat: files
    edited, the patterns learned, and the final title/subtitle. Then, check if 
    any markup is left in the section files. The markup includes `AI wrote`, `Must add`
    and other callouts (>), `<TODO>`, `<TBD>` and similar tags. If no markup is left,

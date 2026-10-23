@@ -93,3 +93,5 @@ Outline rules: `outline_rules.md`; generate content per `article_rules.md` +
    the files for `@section-code` lines that have no file yet, as in step 3. Leave the
    existing files untouched — they are the current text (`outline_rules.md`,
    *Lifecycle*).
+
+5. **Content base.** After any of steps 2–4, run `sync-4content` on the folder.

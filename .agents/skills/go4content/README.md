@@ -285,6 +285,29 @@ done
    (final table: every section "initial → new", title/subtitle line, leftovers)
 ```
 
+## Google Docs export
+
+Ask the agent for an `HTML` or a `Google Doc` of the article; it builds
+`dist/<folder-name>.md` if needed and converts it with `scripts/markdown-to-html.py`,
+then `scripts/html-to-gdoc.py` (rules: `rules/project_rules.md`, *HTML and Google Doc*).
+Images become highlighted `[IMAGE: file]` placeholders in the doc. The doc is created
+under your own Google account, so it uses your Drive storage.
+
+One-time setup:
+1. `python3 -m pip install markdown-it-py google-api-python-client google-auth-oauthlib`
+2. In Google Cloud Console, in any project: enable the **Google Drive API** and the
+   **Google Docs API**; configure the OAuth consent screen (External, add yourself as
+   a test user) and **publish the app** (*In production*). An app left in *Testing*
+   gets refresh tokens that expire after 7 days, so you would sign in again weekly.
+3. Create an OAuth client ID of type **Desktop app**, download its JSON and save it as
+   `~/.config/gdrive-access/client_secret.json` (or point `GO4CONTENT_GOOGLE_CLIENT_SECRET`
+   to it).
+4. Set `ACCESS_GDOC_FOLDER` to the target Drive folder ID or URL in your shell
+   profile.
+5. On the first run a browser window asks you to sign in and allow Drive access
+   ("Google hasn't verified this app" is expected for your own app: *Advanced* →
+   *Go to …*). The token is cached in `~/.config/gdrive-access/token.json`.
+
 ## Related skills
 
 - `improve-article-4content` — the single-file editor behind `improve4content`;

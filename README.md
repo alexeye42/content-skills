@@ -42,8 +42,11 @@ or any agent that reads skills from a folder.
   the next part; intro, conclusion, title and subtitle come last; a before/after
   score table closes the run.
 
-Behind them are nine content processing skills, `qna-manager` for asking questions and
-storing your answers, and `git-commit-flow` for commit automation. Prompt words, 
+Behind them are eleven content processing skills, `qna-manager` for asking questions
+and storing your answers, `git-commit-flow` for commit automation, and
+`sync-4content`, which keeps an optional content base `CONTENT.md` in step with your
+files (it does nothing until you create one). How the skills fit together, in
+diagrams: `.agents/skills-doc/README.md`. Prompt words, 
 the markup notation, commands, and example sessions: `.agents/skills/go4content/README.md`.
 
 ## Example article
@@ -125,7 +128,8 @@ Create a folder, put `n_dump.mkd` or `n_draft.mkd` in it, and say `/go4content <
 ## Repository layout
 
 ```
-.agents/skills/            14 *4content skills + qna-manager (scripts/ and references/ inside)
+.agents/skills/            15 *4content skills + qna-manager (scripts/ and references/ inside)
+.agents/skills-doc/        diagrams of the skill system, one file each
 .agents/rules/             9 rule files + profile/ (audience.md, editorial.md)
 000-examples/              a finished article as a sample: outline and section files
 scripts/                   setup-claude.sh / .cmd / .ps1

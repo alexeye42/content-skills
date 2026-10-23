@@ -39,7 +39,7 @@ language (`audience_rules.md`, *Resolving the language*).
    placeholders for material that is still missing; mark text you had to write
    without source material with an `🤖 **AI wrote:**` callout and author-only
    material with `➕ **Must add:**` (*Agent callouts*, `format_rules.md`).
-6. Write `n_draft.mkd`.
+6. Write `n_draft.mkd`, then run `sync-4content` on the folder.
 
 ## Notes
 - The draft is split into section files by its top-level headings as is

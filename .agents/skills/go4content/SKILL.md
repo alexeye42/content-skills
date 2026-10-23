@@ -39,6 +39,7 @@ plain words instead.
 
    Create the folder per `project_rules.md` if it doesn't exist. Detect the mode and
    the channel (`audience_rules.md`, *Resolving the channel*). Read the source in full.
+   Run `sync-4content` on the folder.
 
 2. **Commit check.** `git status --short` for the folder; commit uncommitted changes
    via `git-commit-flow` (author `human` or `human/ai`) before any generation.
@@ -100,7 +101,8 @@ plain words instead.
   publish this piece in other channels too, now is the moment to create their
   folders with the same draft — which channels (suffixes)?" For each suffix named,
   create the sibling folder `N.n<suffix>-code` next to this one with a copy of the
-  draft as `n<suffix>_draft.mkd`; copy nothing else, list the folders created, and
+  draft as `n<suffix>_draft.mkd`, then run `sync-4content` on it with `variant_of`
+  this folder; copy nothing else, list the folders created, and
   continue with the current folder only. Each sibling later runs as its own 1C;
   restructuring it for its channel is the human's edit of its draft copy. Channel
   versions differ in structure, so branching at the section files is too late.

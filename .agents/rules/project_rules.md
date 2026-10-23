@@ -17,9 +17,27 @@ These rules describe the entire project.
   - image files. An image file name can be referenced in the markdown file as `![*](image-name.png)`;
   - translation file or other *.md files, you must ignore them when analyzing the piece folder.
 
+# Content base
+`CONTENT.md` in the project root, if it exists, lists the topics and the pieces with their statuses and dates; its format is its own `## Properties` section.
+- The entries follow the files through `sync-4content`, which the `*4content` skills run themselves.
+- `ready` and `published` come only from the human: when they say in any session that a piece is ready or published, set the entry's `status` and `ready_date` (or `publication_date` and `publication_url`; ask for the URL if it is missing) per `## Properties`.
+
 # Building an article
 "Build the article" means assembling the piece's section files into one file by running, from the project root:
 ```
 python3 .agents/skills/go4content/scripts/sections-to-markdown.py <piece-folder>
 ```
 It concatenates the `*.md` section files in name order (skipping filenames containing `qna`, case-insensitively, and stripping `<delete>` blocks) into `<piece-folder>/dist/<folder-name>.md`. Do not assemble the article by hand.
+
+## HTML and Google Doc
+When the human asks for an HTML file or a Google Doc of the article, first make sure `<piece-folder>/dist/<folder-name>.md` is current: if it is missing or older than any section file, build the article as above. Then run, from the project root:
+```
+python3 .agents/skills/go4content/scripts/markdown-to-html.py <piece-folder>/dist/<folder-name>.md
+```
+It writes `dist/<folder-name>.html` next to the markdown file: the first `# ` heading becomes the title, an HTML comment right under it becomes the subtitle, every other HTML comment is dropped. It also lists placeholder links (`(url)`, `(#xxxx)`) still to fill in; pass them on to the human. For an HTML file, stop here.
+
+For a Google Doc, also run:
+```
+python3 .agents/skills/go4content/scripts/html-to-gdoc.py <piece-folder>/dist/<folder-name>.html
+```
+It creates a new doc named `<piece code> <title>` (e.g. `205.1m Vibe Coding Large Systems: …`) in the Drive folder from `GO4CONTENT_GDOC_FOLDER` (or `--folder <id-or-url>`), with highlighted `[IMAGE: file]` placeholders instead of images, and prints the doc link. Every run creates a new doc; it does not update an earlier one. If it fails for a missing OAuth client or folder, point the human to *Google Docs export* in the go4content README instead of working around it.
